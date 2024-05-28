@@ -1,0 +1,45 @@
+{
+	"name": "color-palettes",
+	"version": "0.0.1",
+	"description": "Research and data on popular bespoke color palettes",
+	"type": "module",
+	"types": "./types",
+	"scripts": {
+		"build:html": "npx @11ty/eleventy --config=_build/eleventy.js",
+		"watch:html": "npx @11ty/eleventy --config=_build/eleventy.js --serve",
+		"build": "run-s build:html",
+		"watch": "run-p watch:*",
+		"prepack": "npm run build",
+		"release": "release-it"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/color-js/palettes.git"
+	},
+	"keywords": [
+		"color",
+		"color palettes",
+		"design systems"
+	],
+	"contributors": [
+		"Lea Verou",
+		"Chris Lilley"
+	],
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/color-js/palettes/issues"
+	},
+	"homepage": "https://palettes.colorjs.io",
+	"devDependencies": {
+		"@11ty/eleventy": "3.0.0-alpha.10",
+		"@stylistic/eslint-plugin": "latest",
+		"@typescript-eslint/eslint-plugin": "latest",
+		"@typescript-eslint/parser": "latest",
+		"json5": "^2.2.3",
+		"npm-run-all": "^4.1.5",
+		"release-it": "^17.1.1"
+	},
+	"dependencies": {
+		"colorjs.io": "latest"
+	}
+}
