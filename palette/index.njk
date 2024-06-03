@@ -1,0 +1,9 @@
+<h1>Palettes</h1>
+
+<ul>
+	{% for palette in palettes %}
+		<li>
+			<a href="./{{ palette.id }}/">{{ palette.name }}</a>
+		</li>
+	{% endfor %}
+</ul>

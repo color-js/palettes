@@ -1,0 +1,9 @@
+.color-scale > div {
+	display: flex;
+	gap: .1em;
+	margin-block: 1em;
+}
+
+color-swatch[gamut="srgb"]::part(gamut) {
+	display: none;
+}

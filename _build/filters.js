@@ -14,3 +14,7 @@ export function unslugify (slug) {
 export function number (value, options) {
 	return value.toLocaleString("en", options);
 }
+
+export function serializeObject (obj) {
+	return Object.entries(obj).map(([key, value]) => `${ key }: ${ value }`).join(", ");
+}
