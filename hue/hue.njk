@@ -1,0 +1,49 @@
+---
+includes: '<link rel="stylesheet" href="../style.css" />'
+pagination:
+  data: hues
+  resolve: values
+  size: 1
+  alias: hue
+permalink: "hue/{{ hue.name }}/index.html"
+eleventyComputed:
+  title: "{{ hue.name }}"
+---
+
+{# <aside id="toc">
+	<ul>
+		{% for h in hues %}
+			{%- if h.name == hue.name -%}
+			<li class="current" aria-label="This page">{{ h.name }}
+				<ul>
+					{% for palette in hue.palettes %}
+					<li><a href="#{{ palette }}">{{ palettes[palette].name }}</a></li>
+					{% endfor %}
+				</ul>
+			</li>
+			{%- else -%}
+			<li><a href="../{{ h.name }}">{{ h.name }}</a></li>
+			{%- endif %}
+		{% endfor %}
+	</ul>
+</aside> #}
+
+<h1>{{ hue.name }}</h1>
+
+<table>
+<thead>
+	<tr>
+		<th>Palette</th>
+		<th style="width: 100%">Scale</th>
+	</tr>
+	<tbody>
+		{% for id, colors in hue.palettes %}
+			<tr id="{{ id }}">
+				<th><a href="../palette/{{id}}/#{{ hue.name }}">{{ palettes[id].name }}</a></th>
+				<td><color-scale colors="{{ colors | serializeObject }}"></color-scale></td>
+			</tr>
+		{% endfor %}
+	</tbody>
+</thead>
+</table>
+

@@ -18,3 +18,34 @@ export function number (value, options) {
 export function serializeObject (obj) {
 	return Object.entries(obj).map(([key, value]) => `${ key }: ${ value }`).join(", ");
 }
+
+export function objectValues (obj) {
+	return Object.values(obj);
+}
+
+export function objectKeys (obj) {
+	return Object.keys(obj);
+}
+
+export function min (arr) {
+	return Math.min(...arr);
+}
+
+export function max (arr) {
+	return Math.max(...arr);
+}
+
+export function mean (arr) {
+	return arr.reduce((a, b) => a + b, 0) / arr.length;
+}
+
+export function median (arr) {
+	arr = arr.slice().sort((a, b) => a - b);
+
+	if (arr.length % 2 === 0) {
+		return (arr[arr.length / 2 - 1] + arr[arr.length / 2]) / 2;
+	}
+	else {
+		return arr[Math.floor(arr.length / 2)];
+	}
+}

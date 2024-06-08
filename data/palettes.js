@@ -34,4 +34,6 @@ for (let palette of Palettes) {
 	palette.colors = ret;
 }
 
+Palettes = Object.fromEntries(Palettes.map(p => [p.id, p]));
+
 export default Palettes;

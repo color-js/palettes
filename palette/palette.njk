@@ -2,6 +2,7 @@
 includes: '<link rel="stylesheet" href="../style.css" />'
 pagination:
   data: palettes
+  resolve: values
   size: 1
   alias: palette
 permalink: "palette/{{ palette.id }}/index.html"
@@ -11,8 +12,7 @@ eleventyComputed:
 
 <aside id="toc">
 	<ul>
-		{% for p in palettes %}
-
+		{% for id, p in palettes %}
 			{% if p.id -%}
 				{%- if p.id == palette.id -%}
 				<li class="current" aria-label="This page">{{ p.name }}
