@@ -1,13 +1,17 @@
----
-includes: '<link rel="stylesheet" href="../style.css" />'
-pagination:
-  data: hues
-  resolve: values
-  size: 1
-  alias: hue
-permalink: "hue/{{ hue.name }}/index.html"
-eleventyComputed:
-  title: "{{ hue.name }}"
+---js
+{
+	pagination: {
+		data: "hues",
+		resolve: "values",
+		size: 1,
+		alias: "hue",
+		filter: hue => Object.keys(hue.palettes).length > 1
+	},
+	permalink: "hues/{{ hue.name }}/index.html",
+	eleventyComputed: {
+		title: "{{ hue.name }}"
+	},
+}
 ---
 
 {# <aside id="toc">

@@ -15,8 +15,8 @@ N/A
 			<th>Name</th>
 			<th>Type</th>
 			<th>Palettes</th>
-			<th>Hue</th>
-			<th>Chroma</th>
+			<th>Mean Hue</th>
+			<th>Hue extent</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -25,8 +25,8 @@ N/A
 				<th><a href="./{{ hue }}/">{{ info.name }}</a></th>
 				<td>{{ info.type }}</td>
 				<td>{{ (info.palettes | objectKeys).length }}</td>
-				<td>{{ print_range(info.hue) }}</td>
-				<td>{{ print_range(info.chroma) }}</td>
+				<td>{{ info.hue.mean | number }}</td>
+				<td>{{ info.hue.min | number }} &ndash; {{ info.hue.max | number }}</td>
 			</tr>
 		{% endfor %}
 	</tbody>
