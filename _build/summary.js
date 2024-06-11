@@ -65,14 +65,19 @@ for (let palette of palettes) {
 				};
 			}
 
-			let colors = Object.values(hueColors).map(str => new Color(str).to("oklch"));
+			hues[hue].palettes[palette.id] = hueColors;
+			hueColors = Object.values(hueColors);
+
+			// Extract the 2-3 middle colors
+			let midColors = hueColors.slice(Math.floor(hueColors.length / 2), Math.ceil(hueColors.length / 2) + 1);
+
+			let colors = midColors.map(str => new Color(str).to("oklch"));
 			let hueValues = colors.map(c => c.get("h")).filter(h => Number.isFinite(h)).map(h => h + 360);
 			hues[hue].hue.push(...hueValues);
 			hues[hue].chroma.push(...colors.map(c => c.get("c")).filter(c => Number.isFinite(c)));
-			hues[hue].palettes[palette.id] = hueColors;
 
-			let example = colors[Math.floor(colors.length / 2)];
-			hues[hue].examples[palette.id] = example + "";
+
+			hues[hue].examples[palette.id] = midColors[Math.floor((midColors.length - 1) / 2)] + "";
 		}
 	}
 
