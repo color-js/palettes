@@ -1,2 +1,15 @@
 @import url("https://colorjs.io/assets/css/style.css");
 @import url("https://colorjs.io/assets/css/docs.css");
+
+a {
+	font-weight: bold;
+}
+
+th small {
+	display: block;
+	color: hsl(220, 10%, 48%);
+	font-style: italic;
+	font-weight: normal;
+	font-family: var(--font-serif);
+	text-transform: capitalize;
+}

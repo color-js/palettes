@@ -1,0 +1,24 @@
+<table>
+	<thead>
+		<tr>
+			<th>Name</th>
+			<th>Hues</th>
+			<th>Neutrals</th>
+			<th>Range</th>
+			<th>Steps</th>
+			<th>Step</th>
+		</tr>
+	</thead>
+	{% for id, palette in palettes %}
+		<tr>
+			<th>
+				<a href="./{{ palette.id }}/">{{ palette.name }}</a>
+			</th>
+			<td>{{ palette.count.hue }}</td>
+			<td>{{ palette.count.neutral }}</td>
+			<td>{{ palette.levels | range }}</td>
+			<td>{{ palette.levels.steps | range }}</td>
+			<td>{{ palette.levels.step | range }}</td>
+		</tr>
+	{% endfor %}
+</table>

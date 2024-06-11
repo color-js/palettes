@@ -1,34 +1,4 @@
-{% macro print_range (info) %}
-{% if info.values.length > 0 -%}
-{{ info.midrange | number }} ± {{ (info.midrange - info.min) | number }}
-{%- else -%}
-N/A
-{%- endif %}
-{% endmacro %}
-
-
 <h1>Hues</h1>
 
-<table>
-	<thead>
-		<tr>
-			<th>Name</th>
-			<th>Type</th>
-			<th>Palettes</th>
-			<th>Mean Hue</th>
-			<th>Hue extent</th>
-		</tr>
-	</thead>
-	<tbody>
-		{% for hue, info in hues %}
-			<tr>
-				<th><a href="./{{ hue }}/">{{ info.name }}</a></th>
-				<td>{{ info.type }}</td>
-				<td>{{ (info.palettes | objectKeys).length }}</td>
-				<td>{{ info.hue.mean | number }}</td>
-				<td>{{ info.hue.min | number }} &ndash; {{ info.hue.max | number }}</td>
-			</tr>
-		{% endfor %}
-	</tbody>
-</table>
+{% include "partials/_hue-table.njk" %}
 

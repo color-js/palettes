@@ -53,3 +53,17 @@ export function median (arr) {
 		return arr[Math.floor(arr.length / 2)];
 	}
 }
+
+export function range (obj) {
+	if (!obj || typeof obj !== "object") {
+		return number(obj);
+	}
+
+	let ret = number(obj.min);
+
+	if (obj.min == obj.max) {
+		return ret;
+	}
+
+	return ret + " – " + number(obj.max);
+}

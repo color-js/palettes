@@ -41,7 +41,14 @@ eleventyComputed:
 	<tbody>
 		{% for hue, scale in palette.colors %}
 			<tr id="{{ hue }}">
-				<th>{{ hue }}</th>
+				<th>
+					{%- if hues[hue].palette_count > 1 -%}
+					<a href="../{{ hue }}/">{{ hues[hue].name }}</a>
+					{%- else -%}
+					{{ hue }}
+					{%- endif -%}
+					<small>{{ hues[hue].type }}</small>
+				</th>
 				<td><color-scale colors="{{ scale | serializeObject }}"></color-scale></td>
 			</tr>
 		{% endfor %}
