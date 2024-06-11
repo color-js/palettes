@@ -54,6 +54,13 @@ export function median (arr) {
 	}
 }
 
+export function stddev (arr) {
+	let avg = mean(arr);
+	let sum = arr.reduce((a, b) => a + (b - avg) ** 2, 0);
+
+	return Math.sqrt(sum / arr.length);
+}
+
 export function range (obj) {
 	if (!obj || typeof obj !== "object") {
 		return number(obj);

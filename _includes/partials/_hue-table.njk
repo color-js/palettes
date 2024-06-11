@@ -2,21 +2,28 @@
 	<thead>
 		<tr>
 			<th>Name</th>
-			<th>Type</th>
-			<th>Palettes</th>
-			<th>Hue mean</th>
-			<th>Hue extent</th>
+			<th style="width: 75%">Palettes</th>
+			<th>Hue</th>
 		</tr>
 	</thead>
 	<tbody>
 		{% for hue, info in hues %}
+		{% if info.palette_count > 1 %}
 			<tr>
-				<th><a href="{{ page | relative }}/hues/{{ hue }}/">{{ info.name }}</a></th>
-				<td>{{ info.type }}</td>
-				<td>{{ (info.palettes | objectKeys).length }}</td>
-				<td>{{ info.hue.mean | number }}</td>
-				<td>{{ info.hue.min | number }} &ndash; {{ info.hue.max | number }}</td>
+				<th>
+					<a href="{{ page | relative }}/hues/{{ hue }}/">{{ info.name }}</a>
+					<small>{{ info.type }}</small>
+				</th>
+				<td>
+					{{ (info.palettes | objectKeys).length }}
+					<color-scale class="compact" colors="{{ info.examples | serializeObject }}"></color-scale>
+				</td>
+				<td>{{ info.hue.mean | number }}
+				<small>{{ info.hue.min | number }} &ndash; {{ info.hue.max | number }}</small>
+				<small>σ = {{ info.hue.stddev | number({maximumFractionDigits: 1}) }}</small>
+				</td>
 			</tr>
+		{% endif %}
 		{% endfor %}
 	</tbody>
 </table>

@@ -7,13 +7,22 @@ a {
 
 table {
 	margin-top: 1em;
+
+	small {
+		display: block;
+		color: hsl(220, 10%, 48%);
+		font-style: italic;
+		font-weight: normal;
+		font-family: var(--font-serif);
+	}
+
+	th small {
+		text-transform: capitalize;
+	}
 }
 
-th small {
-	display: block;
-	color: hsl(220, 10%, 48%);
-	font-style: italic;
-	font-weight: normal;
-	font-family: var(--font-serif);
-	text-transform: capitalize;
+color-scale.compact {
+	&::part(color-swatch) {
+		font-size: 70%;
+	}
 }

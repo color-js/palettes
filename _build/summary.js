@@ -61,6 +61,7 @@ for (let palette of palettes) {
 					hue: [],
 					chroma: [],
 					palettes: {},
+					examples: {},
 				};
 			}
 
@@ -69,6 +70,9 @@ for (let palette of palettes) {
 			hues[hue].hue.push(...hueValues);
 			hues[hue].chroma.push(...colors.map(c => c.get("c")).filter(c => Number.isFinite(c)));
 			hues[hue].palettes[palette.id] = hueColors;
+
+			let example = colors[Math.floor(colors.length / 2)];
+			hues[hue].examples[palette.id] = example + "";
 		}
 	}
 
@@ -96,6 +100,7 @@ for (let hue in hues) {
 			midrange: (min + max) / 2,
 			mean: filters.mean(values),
 			median: filters.median(values),
+			stddev: filters.stddev(values),
 			// values,
 		};
 	}
