@@ -12,7 +12,7 @@
 	{% for id, palette in palettes %}
 		<tr>
 			<th>
-				<a href="./{{ palette.id }}/">{{ palette.name }}</a>
+				<a href="{{ page | relative }}/palettes/{{ palette.id }}/">{{ palette.name }}</a>
 			</th>
 			<td>{{ palette.count.hue }}</td>
 			<td>{{ palette.count.neutral }}</td>

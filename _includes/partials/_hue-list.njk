@@ -1,7 +1,7 @@
 <ul>
 	{% for hue, info in hues -%}
 		{%- if info.palette_count > 1 -%}
-			<li><a href="./{{ hue }}/">{{ info.name }}</a></li>
+			<li><a href="{{ page | relative }}/hues/{{ hue }}/">{{ info.name }}</a></li>
 		{%- endif -%}
 	{%- endfor %}
 </ul>

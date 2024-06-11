@@ -11,7 +11,7 @@
 	<tbody>
 		{% for hue, info in hues %}
 			<tr>
-				<th><a href="./{{ hue }}/">{{ info.name }}</a></th>
+				<th><a href="{{ page | relative }}/hues/{{ hue }}/">{{ info.name }}</a></th>
 				<td>{{ info.type }}</td>
 				<td>{{ (info.palettes | objectKeys).length }}</td>
 				<td>{{ info.hue.mean | number }}</td>

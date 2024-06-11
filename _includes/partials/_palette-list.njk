@@ -1,7 +1,7 @@
 <ul>
 	{% for id, palette in palettes %}
 		<li>
-			<a href="{{ page | relative }}/{{ palette.id }}/">{{ palette.name }}</a>
+			<a href="{{ page | relative }}/palettes/{{ palette.id }}/">{{ palette.name }}</a>
 		</li>
 	{% endfor %}
 </ul>
