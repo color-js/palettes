@@ -33,6 +33,25 @@ eleventyComputed:
 <h1>{{ palette.name }}</h1>
 
 <table>
+	<thead>
+		<tr>
+			<th>Hues</th>
+			<th>Neutrals</th>
+			<th>Range</th>
+			<th>Steps</th>
+			<th>Step</th>
+		</tr>
+	</thead>
+	<tr>
+		<td>{{ palette.count.hue }}</td>
+		<td>{{ palette.count.neutral }}</td>
+		<td>{{ palette.levels | range }}</td>
+		<td>{{ palette.levels.steps | range }}</td>
+		<td>{{ palette.levels.step | range }}</td>
+	</tr>
+</table>
+
+<table>
 <thead>
 	<tr>
 		<th>Hue</th>

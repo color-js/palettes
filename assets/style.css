@@ -5,6 +5,10 @@ a {
 	font-weight: bold;
 }
 
+table {
+	margin-top: 1em;
+}
+
 th small {
 	display: block;
 	color: hsl(220, 10%, 48%);
