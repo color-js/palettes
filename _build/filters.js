@@ -12,7 +12,11 @@ export function unslugify (slug) {
 }
 
 export function number (value, options) {
-	return value.toLocaleString("en", options);
+	if (typeof value !== "number" && isNaN(value)) {
+		return value;
+	}
+
+	return Number(value).toLocaleString("en", options);
 }
 
 export function serializeObject (obj) {
