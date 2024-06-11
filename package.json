@@ -5,6 +5,7 @@
 	"type": "module",
 	"types": "./types",
 	"scripts": {
+		"build:data": "node _build/summary.js",
 		"build:html": "npx @11ty/eleventy --config=_build/eleventy.js",
 		"watch:html": "npx @11ty/eleventy --config=_build/eleventy.js --serve",
 		"build": "run-s build:html",

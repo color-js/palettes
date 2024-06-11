@@ -1,11 +1,50 @@
-import Palettes from "./palettes.js";
+import * as fs from "fs";
 import Color from "colorjs.io";
-import * as filters from "../_build/filters.js";
+import * as filters from "./filters.js";
+
+function read_json (file) {
+	let contents = fs.readFileSync(file, "utf-8");
+	return JSON.parse(contents);
+}
+
+let palettes = read_json("data/palette_metadata.json").filter(p => p.id);
+
+// Add palette.colors to each palette
+for (let palette of palettes) {
+	// Import colors
+	let colors = read_json(`data/${palette.id}.json`);
+	let ret = {};
+	let other = {};
+
+	for (let hue in colors) {
+		let value = colors[hue];
+		let subColors = value && typeof value === "object" ? Object.values(value) : [value];
+
+		if (subColors.length === 1) {
+			// Single color, add to other
+			other[hue] = subColors[0];
+		}
+		else {
+			// Multiple colors, add to ret
+			ret[hue] = Object.assign({}, value); // convert array to object
+		}
+	}
+
+	if (Object.keys(other).length > 0) {
+		// Add other last
+		ret.other = other;
+	}
+
+	palette.colors = ret;
+}
+
+// Convert palettes from array to object
+palettes = Object.fromEntries(palettes.map(p => [p.id, p]));
 
 let hues = {};
 
-for (let id in Palettes) {
-	let palette = Palettes[id];
+for (let id in palettes) {
+	let palette = palettes[id];
 
 	if (!palette.colors) {
 		continue;
@@ -48,7 +87,7 @@ for (let hue in hues) {
 			midrange: (min + max) / 2,
 			mean: filters.mean(values),
 			median: filters.median(values),
-			values,
+			// values,
 		};
 	}
 
@@ -72,5 +111,9 @@ hues = Object.fromEntries(Object.entries(hues).sort((a, b) => {
 
 	return count_b - count_a;
 }));
-// console.log(hues);
-export default hues;
+
+fs.writeFileSync("data/palettes.json", JSON.stringify(palettes, null, "\t"));
+fs.writeFileSync("data/hues.json", JSON.stringify(hues, null, "\t"));
+
+export {hues};
+export default palettes;
