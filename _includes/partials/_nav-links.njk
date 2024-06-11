@@ -1,5 +1,11 @@
 <a href="https://colorjs.io">Color.js</a>
-<a href="{{ page | relative }}/hues/">Hues</a>
-<a href="{{ page | relative }}/palettes/">Palettes</a>
+<div class="menu">
+	<a href="{{ page | relative }}/hues/">Hues</a>
+	{% include "partials/_hue-list.njk" %}
+</div>
+<div class="menu">
+	<a href="{{ page | relative }}/palettes/">Palettes</a>
+	{% include "partials/_palette-list.njk" %}
+</div>
 <a href="https://github.com/color-js/palettes">GitHub</a>
 <a href="https://github.com/color-js/palettes/issues/new" class="footer">File bug</a>

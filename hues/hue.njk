@@ -5,7 +5,7 @@
 		resolve: "values",
 		size: 1,
 		alias: "hue",
-		filter: hue => Object.keys(hue.palettes).length > 1
+		filter: hue => hue.palette_count > 1
 	},
 	permalink: "hues/{{ hue.name }}/index.html",
 	eleventyComputed: {

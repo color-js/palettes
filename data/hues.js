@@ -40,9 +40,7 @@ for (let hue in hues) {
 
 	for (let coord of ["hue", "chroma"]) {
 		let values = data[coord];
-		if (!values) {
-			console.log(values, coord, hue);
-		}
+
 		let min = filters.min(values);
 		let max = filters.max(values);
 		data[coord] = {
@@ -54,13 +52,14 @@ for (let hue in hues) {
 		};
 	}
 
+	data.palette_count = Object.keys(data.palettes).length;
 	data.type = data.chroma.max > 0.05 ? "hue" : "neutral";
 }
 
 // Sort by descending number of palettes
 hues = Object.fromEntries(Object.entries(hues).sort((a, b) => {
-	let count_a = Object.keys(a[1].palettes).length;
-	let count_b = Object.keys(b[1].palettes).length;
+	let count_a = a[1].palette_count;
+	let count_b = b[1].palette_count;
 
 	if (count_a === count_b) {
 		if (a[1].type === b[1].type) {
