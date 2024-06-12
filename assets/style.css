@@ -26,3 +26,29 @@ color-scale.compact {
 		font-size: 70%;
 	}
 }
+
+svg.color-chart {
+	display: block;
+	margin: 1em auto;
+	border: 1px solid hsl(220 10% 50%);
+	background: linear-gradient(to bottom, hsl(220 10% 50% / 40%) 0 1px, transparent 0) 0 -1px / 100% calc(100% / var(--ticks-y, 10)),
+	            linear-gradient(to right, hsl(220 10% 50% / 30%) 0 1px, transparent 0) -1px 0 / calc(100% / var(--ticks-x, 10)) 100%;
+
+	&::before {
+		content: "Lightness";
+	}
+
+	circle {
+		transform-box: fill-box;
+		transform-origin: center;
+		transition: .3s;
+
+		&:hover {
+			transform: scale(1.5);
+		}
+	}
+
+	line {
+		stroke-width: .4px;
+	}
+}

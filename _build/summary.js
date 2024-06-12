@@ -160,6 +160,16 @@ for (let id in palettes) {
 
 	// Sort hues by descending popularity
 	palette.colors = sort_hues(palette.colors);
+
+	// Store oklch coords
+	palette.colors_oklch = Object.assign({}, palette.colors);
+	for (let hue in palette.colors_oklch) {
+		let value = Object.assign({}, palette.colors_oklch[hue]);
+		for (let level in value) {
+			value[level] = new Color(value[level]).to("oklch").coords;
+		}
+		palette.colors_oklch[hue] = value;
+	}
 }
 
 fs.writeFileSync("data/palettes.json", JSON.stringify(palettes, null, "\t"));
