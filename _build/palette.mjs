@@ -184,9 +184,9 @@ async function process_js_palette (file, outputFile, { exportName } = {}) {
 	write_palette(outputFile, ret, colors);
 }
 
-// process_css_palette("data/raw/tailwind.css", "data/tailwind.json");
-// process_scss_palette("data/raw/material.scss", "data/material.json");
-// process_json_palette("data/raw/primer-light.json5", "data/primer.json", {path: ["base", "color"]});
-// process_js_palette("data/raw/openprops.js", "data/openprops.json");
-// process_js_palette("data/raw/carbon.js", "data/carbon.json", {exportName: "colors"});
-process_json_palette("data/raw/spectrum.json", "data/spectrum.json");
+// process_css_palette("data/raw/tailwind.css", "data/palettes/tailwind.json");
+// process_scss_palette("data/raw/material.scss", "data/palettes/material.json");
+// process_json_palette("data/raw/primer-light.json5", "data/palettes/primer.json", {path: ["base", "color"]});
+// process_js_palette("data/raw/openprops.js", "data/palettes/openprops.json");
+// process_js_palette("data/raw/carbon.js", "data/palettes/carbon.json", {exportName: "colors"});
+// process_json_palette("data/raw/spectrum.json", "data/palettes/spectrum.json");

@@ -13,7 +13,7 @@ let hues = {};
 // Add palette.colors to each palette
 for (let palette of palettes) {
 	// Import colors
-	let colors = read_json(`data/${palette.id}.json`);
+	let colors = read_json(`data/palettes/${palette.id}.json`);
 	let ret = {};
 	let other = {};
 
