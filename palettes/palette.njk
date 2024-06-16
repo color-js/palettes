@@ -126,7 +126,7 @@ eleventyComputed:
 					{%- endif -%}
 					<small>{{ hues[hue].type }}</small>
 				</th>
-				<td><color-scale colors="{{ scale | serializeObject }}" coords="L: lch.l, C: lch.c, H: lch.h"></color-scale></td>
+				<td><color-scale colors="{{ scale | serializeObject }}" info="L: lch.l, C: lch.c, H: lch.h"></color-scale></td>
 			</tr>
 		{% endfor %}
 	</tbody>
