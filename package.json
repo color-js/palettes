@@ -41,6 +41,7 @@
 		"release-it": "^17.1.1"
 	},
 	"dependencies": {
+		"color-elements": "^0.0.2",
 		"colorjs.io": "latest"
 	}
 }
