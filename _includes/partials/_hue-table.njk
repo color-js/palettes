@@ -15,7 +15,7 @@
 					<small>{{ info.type }}</small>
 				</th>
 				<td>
-					{{ (info.palettes | objectKeys).length }}
+					{{ (info.palettes | keys).length }}
 					<color-scale class="compact" colors="{{ info.examples | serializeObject }}"></color-scale>
 				</td>
 				<td>{{ info.hue.mean | number }}

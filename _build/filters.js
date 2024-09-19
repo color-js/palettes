@@ -20,46 +20,44 @@ export function number (value, options) {
 	return Number(value).toLocaleString("en", options);
 }
 
+export function prependKeys (obj, prefix) {
+	let ret = {};
+
+	for (let [key, value] of Object.entries(obj)) {
+		ret[prefix + key] = value;
+	}
+
+	return ret;
+}
+
+export function plotHue (huePalettes) {
+	let ret = [];
+
+	for (let paletteId in huePalettes) {
+		let colors = huePalettes[paletteId];
+		let step = 100 / (Object.values(colors).length - 1);
+
+		let newColors = mapObject(colors, ([key, value], i) => [`${ paletteId } ${ key } / ${ i * step }`, value]);
+		ret.push(newColors);
+	}
+
+	return ret;
+}
+
+export function mapObject (obj, fn) {
+	return Object.fromEntries(Object.entries(obj).map(fn));
+}
+
 export function serializeObject (obj) {
 	return Object.entries(obj).map(([key, value]) => `${ key }: ${ value }`).join(", ");
 }
 
-export function objectValues (obj) {
+export function values (obj) {
 	return Object.values(obj);
 }
 
-export function objectKeys (obj) {
+export function keys (obj) {
 	return Object.keys(obj);
-}
-
-export function min (arr) {
-	return Math.min(...arr);
-}
-
-export function max (arr) {
-	return Math.max(...arr);
-}
-
-export function mean (arr) {
-	return arr.reduce((a, b) => a + b, 0) / arr.length;
-}
-
-export function median (arr) {
-	arr = arr.slice().sort((a, b) => a - b);
-
-	if (arr.length % 2 === 0) {
-		return (arr[arr.length / 2 - 1] + arr[arr.length / 2]) / 2;
-	}
-	else {
-		return arr[Math.floor(arr.length / 2)];
-	}
-}
-
-export function stddev (arr) {
-	let avg = mean(arr);
-	let sum = arr.reduce((a, b) => a + (b - avg) ** 2, 0);
-
-	return Math.sqrt(sum / arr.length);
 }
 
 export function range (obj) {
