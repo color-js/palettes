@@ -17,9 +17,8 @@ eleventyComputed:
 				{%- if p.id == palette.id -%}
 				<li class="current" aria-label="This page">{{ p.name }}
 					<ul>
-						{% for hue, scale in palette.colors %}
-						<li><a href="#{{ hue }}">{{ hue }}</a></li>
-						{% endfor %}
+						<li><a href="#charts">Charts</a></li>
+						<li><a href="#tints">Tints & Shades</a></li>
 					</ul>
 				</li>
 				{%- else -%}
@@ -51,64 +50,17 @@ eleventyComputed:
 	</tr>
 </table>
 
-<h2>Lightness</h2>
-<svg class="color-chart" viewBox="0 0 {{ palette.levels.steps.max * 10 }} 50" overflow="visible"
-     style="--step-min: {{ palette.levels.step.min * 10 }}; --ticks-x: {{ palette.levels.steps.max }}">
-	{% for hue, tints in palette.colors_oklch %}
-		{% for level, coords in tints %}
-			{% if prev_coords %}
-				<line x1="{{ prev_level / palette.levels.step.max * 10 }}" y1="{{ (1 - prev_coords[0]) * 50 }}"
-				      x2="{{ level / palette.levels.step.max * 10 }}" y2="{{ (1 - coords[0]) * 50 }}"
-				      stroke="{{ palette.colors[hue][prev_level] }}" />
-			{% endif %}
-			<circle r=".5" cx="{{ level / palette.levels.step.max * 10 }}" cy="{{ (1 - coords[0]) * 50}}" fill="{{ palette.colors[hue][level] }}">
-				<title>{{ hue }} {{ level }}: {{ (coords[0] * 100) | number }}%</title>
-			</circle>
-			{% set prev_level = level %}
-			{% set prev_coords = coords %}
-		{% endfor %}
-	{% endfor %}
-</svg>
+<h2 id="charts">Charts</h2>
+{% for id, coord in ColorSpaces.oklch.coords %}
+	<h3>{{ coord.name or id }}</h3>
+	<color-chart y="oklch.{{ id }}" info="L: oklch.l, C: oklch.c, H: oklch.h">
+		{% for hue, scale in palette.colors -%}
+			<color-scale colors="{{ scale | serializeObject }}" info="L: oklch.l, C: oklch.c, H: oklch.h"></color-scale>
+		{%- endfor %}
+	</color-chart>
+{% endfor %}
 
-<h2>Chroma</h2>
-<svg class="color-chart" viewBox="0 0 {{ palette.levels.steps.max * 10 }} 50" overflow="visible"
-     style="--ticks-x: {{ palette.levels.steps.max }}">
-	{% for hue, tints in palette.colors_oklch %}
-		{% for level, coords in tints %}
-			{% if prev_coords %}
-				<line x1="{{ prev_level / palette.levels.step.max * 10 }}" y1="{{ (1 - prev_coords[1] * 4) * 100 }}%"
-				      x2="{{ level / palette.levels.step.max * 10 }}" y2="{{ (1 - coords[1] * 4) * 100 }}%"
-				      stroke="{{ palette.colors[hue][prev_level] }}" />
-			{% endif %}
-			<circle r=".5" cx="{{ level / palette.levels.step.max * 10 }}" cy="{{ (1 - coords[1] * 4) * 100}}%" fill="{{ palette.colors[hue][level] }}">
-				<title>{{ hue }} {{ level }}: {{ coords[1] | number }}</title>
-			</circle>
-			{% set prev_level = level %}
-			{% set prev_coords = coords %}
-		{% endfor %}
-	{% endfor %}
-</svg>
-
-<h2>Hue</h2>
-<svg class="color-chart" viewBox="0 0 {{ palette.levels.steps.max * 10 }} 72" overflow="visible"
-     style="--ticks-x: {{ palette.levels.steps.max }}; --ticks-y: 36">
-	{% for hue, tints in palette.colors_oklch %}
-		{% for level, coords in tints %}
-			{% if prev_coords %}
-				<line x1="{{ prev_level / palette.levels.step.max * 10 }}" y1="{{ (360 - prev_coords[2])/3.6  }}%"
-				      x2="{{ level / palette.levels.step.max * 10 }}" y2="{{ (360 - coords[2])/3.6  }}%"
-				      stroke="{{ palette.colors[hue][prev_level] }}" />
-			{% endif %}
-			<circle r=".5" cx="{{ level / palette.levels.step.max * 10 }}" cy="{{ (360 - coords[2])/3.6 }}%" fill="{{ palette.colors[hue][level] }}">
-				<title>{{ hue }} {{ level }}: {{ coords[2] | number }}</title>
-			</circle>
-			{% set prev_level = level %}
-			{% set prev_coords = coords %}
-		{% endfor %}
-	{% endfor %}
-</svg>
-
-<h2>Tints & Shades</h2>
+<h2 id="tints">Tints & Shades</h2>
 <table>
 <thead>
 	<tr>
