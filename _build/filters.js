@@ -1,4 +1,5 @@
 import * as path from "path";
+export * from "./filters/aggregates.js";
 
 export function relative (page) {
 	let pagePath = page.url.replace(/[^/]+$/, "");
