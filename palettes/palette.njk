@@ -52,7 +52,6 @@ eleventyComputed:
 
 <h2 id="charts">Charts</h2>
 {% for id, coord in ColorSpaces.oklch.coords %}
-	<h3>{{ coord.name or id }}</h3>
 	<color-chart y="oklch.{{ id }}" info="L: oklch.l, C: oklch.c, H: oklch.h">
 		{% for hue, scale in palette.colors -%}
 			<color-scale colors="{{ scale | serializeObject }}" info="L: oklch.l, C: oklch.c, H: oklch.h"></color-scale>
