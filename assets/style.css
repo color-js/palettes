@@ -53,7 +53,7 @@ svg.color-chart {
 	}
 }
 
-h2#charts select {
+h2 select {
 	font: inherit;
 	color: inherit;
 	background: inherit;
