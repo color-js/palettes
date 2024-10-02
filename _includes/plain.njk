@@ -8,15 +8,11 @@
 <link rel="shortcut icon" href="{{ page | relative }}/logo.svg">
 <link rel="stylesheet" href="{{ page | relative }}/assets/style.css">
 
-<script src="https://colorjs.io/color.js" type="module"></script>
-<script src="https://elements.colorjs.io/src/color-scale/color-scale.js" type="module"></script>
-<script src="https://elements.colorjs.io/src/color-chart/color-chart.js" type="module"></script>
-{# <script src="{{ page | relative }}/node_modules/color-elements/src/color-scale/color-scale.js" type="module"></script>
-<script src="{{ page | relative }}/node_modules/color-elements/src/color-chart/color-chart.js" type="module"></script> #}
+<script src="{{ page | relative }}/assets/global.js" type="module"></script>
 
 {{ includes | safe }}
 
-<script src="https://colorjs.io/assets/js/index.js" type="module"></script>
+{# <script src="https://colorjs.io/assets/js/index.js" type="module"></script> #}
 
 </head>
 <body class="{% if body_classes %} {{ body_classes }} {% else %} language-javascript {% endif %}">
