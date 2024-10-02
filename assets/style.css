@@ -52,3 +52,19 @@ svg.color-chart {
 		stroke-width: .4px;
 	}
 }
+
+h2#charts select {
+	font: inherit;
+	color: inherit;
+	background: inherit;
+	field-sizing: content;
+	cursor: pointer;
+
+	&:hover {
+		box-shadow: 0 0 0 1em hsl(50 100% 50% / .1) inset;
+	}
+}
+
+color-chart + color-chart {
+	margin-top: 2em;
+}
