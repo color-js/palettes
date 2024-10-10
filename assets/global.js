@@ -32,9 +32,15 @@ if (charts_h2 || scales_h2) {
 			history.pushState(null, "", `?${ params }${ location.hash }`);
 			let selectedSpace = polarSpaces.find((space) => space.id === spaceId);
 			let coords = Object.entries(selectedSpace.coords);
+			let info = coords.map(([id, meta]) => `${ (meta.name ?? id)[0] }: ${ spaceId }.${ id }`).join(", ");
 
 			for (let i = 0; i < 3; i++) {
 				charts[i].y = spaceId + "." + coords[i][0];
+
+				let scales = charts[i].querySelectorAll("color-scale");
+				for (let scale of scales) {
+					scale.info = info;
+				}
 			}
 
 			if (select2 && select2.value !== spaceId) {
