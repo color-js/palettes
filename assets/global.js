@@ -36,10 +36,7 @@ if (charts_h2 || scales_h2) {
 
 			for (let i = 0; i < 3; i++) {
 				charts[i].y = spaceId + "." + coords[i][0];
-
-				for (let scale of charts[i].children) {
-					scale.info = info;
-				}
+				charts[i].info = info;
 			}
 
 			if (select2 && select2.value !== spaceId) {
