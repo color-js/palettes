@@ -37,8 +37,7 @@ if (charts_h2 || scales_h2) {
 			for (let i = 0; i < 3; i++) {
 				charts[i].y = spaceId + "." + coords[i][0];
 
-				let scales = charts[i].querySelectorAll("color-scale");
-				for (let scale of scales) {
+				for (let scale of charts[i].children) {
 					scale.info = info;
 				}
 			}
