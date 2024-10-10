@@ -26,22 +26,20 @@ if (charts_h2 || scales_h2) {
 		let charts = charts_h2.parentElement.querySelectorAll("color-chart");
 
 		select.onchange = evt => {
-			if (select.value === spaceId) {
-				return;
-			}
-
 			spaceId = select.value;
 			params.set("space", spaceId);
 			console.log(params.toString());
 			history.pushState(null, "", `?${ params }${ location.hash }`);
 			let selectedSpace = polarSpaces.find((space) => space.id === spaceId);
 			let coords = Object.entries(selectedSpace.coords);
+			let info = coords.map(([id, meta]) => `${ (meta.name ?? id)[0] }: ${ spaceId }.${ id }`).join(", ");
 
 			for (let i = 0; i < 3; i++) {
 				charts[i].y = spaceId + "." + coords[i][0];
+				charts[i].info = info;
 			}
 
-			if (select2) {
+			if (select2 && select2.value !== spaceId) {
 				select2.value = spaceId;
 				select2.dispatchEvent(new Event("change"));
 			}
@@ -55,10 +53,6 @@ if (charts_h2 || scales_h2) {
 		let scales = scales_h2.nextElementSibling.querySelectorAll("color-scale");
 
 		select2.onchange = evt => {
-			if (select2.value === spaceId) {
-				return;
-			}
-
 			spaceId = select2.value;
 			let selectedSpace = polarSpaces.find((space) => space.id === spaceId);
 			let coords = Object.entries(selectedSpace.coords);
@@ -68,7 +62,7 @@ if (charts_h2 || scales_h2) {
 				scale.info = info;
 			}
 
-			if (select) {
+			if (select && select.value !== spaceId) {
 				select.value = spaceId;
 				select.dispatchEvent(new Event("change"));
 			}
