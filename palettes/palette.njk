@@ -50,11 +50,19 @@ eleventyComputed:
 	</tr>
 </table>
 
+<style>
+	{% for hue, scale in palette.colors -%}
+	.hide-{{ hue }} color-chart color-scale[data-hue="{{ hue }}"] {
+		visibility: hidden;
+	}
+	{% endfor %}
+</style>
+
 <h2 id="charts">Charts</h2>
 {% for id, coord in ColorSpaces.oklch.coords %}
 	<color-chart y="oklch.{{ id }}" info="L: oklch.l, C: oklch.c, H: oklch.h">
 		{% for hue, scale in palette.colors -%}
-			<color-scale colors="{{ scale | serializeObject }}"></color-scale>
+			<color-scale data-hue="{{ hue }}" colors="{{ scale | serializeObject }}"></color-scale>
 		{%- endfor %}
 	</color-chart>
 {% endfor %}
@@ -76,8 +84,9 @@ eleventyComputed:
 					{{ hue }}
 					{%- endif -%}
 					<small>{{ hues[hue].type }}</small>
+					<input type="checkbox" aria-label="Plot?" checked onchange="document.body.classList.toggle('hide-{{ hue }}', !this.checked)">
 				</th>
-				<td><color-scale colors="{{ scale | serializeObject }}" info="L: lch.l, C: lch.c, H: lch.h"></color-scale></td>
+				<td><color-scale data-hue="{{ hue }}" colors="{{ scale | serializeObject }}" info="L: lch.l, C: lch.c, H: lch.h"></color-scale></td>
 			</tr>
 		{% endfor %}
 	</tbody>
