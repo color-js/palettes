@@ -2,7 +2,7 @@
 <html data-route="{{ page.url }}">
 <head>
 <title>
-	{%- if title -%}{{ title }} &bull; Color Palettes{%- else -%}Color Palettes{%- endif -%}
+	{% if title -%}{{ title }} &bull; {% endif -%}Color Palettes
 </title>
 <meta name="viewport" content="width=device-width" />
 <link rel="shortcut icon" href="{{ page | relative }}/logo.svg">
