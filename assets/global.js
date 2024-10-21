@@ -13,9 +13,23 @@ let scales_h2 = document.querySelector("h2:is(#tints, #palettes):has(+ table col
 if (charts_h2 || scales_h2) {
 	const defaultSpace = "oklch";
 	let spaceId = params.get("space") ?? defaultSpace;
-	let polarSpaces = Object.values(Color.spaces).filter((value) => value.coords.h && Object.values(value.coords).length === 3);
+	let spaces = {polar: {}, rectangular: {}};
+	for (let id in Color.spaces) {
+		let space = Color.spaces[id];
+
+		if (space.id !== id) {
+			continue;
+		}
+		let isPolar = space.coords.h?.type === "angle";
+		spaces[isPolar ? "polar" : "rectangular"][id] = space;
+	}
+
 	let select = document.createElement("select");
-	select.innerHTML = polarSpaces.map((space) => `<option value="${ space.id }">${ space.name }</option>`).join("");
+	select.innerHTML = Object.entries(spaces).map(([type, spaces]) => `
+		<optgroup label="${ type }">
+			${ Object.entries(spaces).map(([id, space]) => `<option value="${ id }">${ space.name }</option>`).join("\n") }
+		</optgroup>
+	`).join("\n");
 	select.value = spaceId;
 
 	let select2;
@@ -30,7 +44,7 @@ if (charts_h2 || scales_h2) {
 			params.set("space", spaceId);
 			console.log(params.toString());
 			history.pushState(null, "", `?${ params }${ location.hash }`);
-			let selectedSpace = polarSpaces.find((space) => space.id === spaceId);
+			let selectedSpace = Color.Space.all.find((space) => space.id === spaceId);
 			let coords = Object.entries(selectedSpace.coords);
 			let info = coords.map(([id, meta]) => `${ (meta.name ?? id)[0] }: ${ spaceId }.${ id }`).join(", ");
 
@@ -54,7 +68,7 @@ if (charts_h2 || scales_h2) {
 
 		select2.onchange = evt => {
 			spaceId = select2.value;
-			let selectedSpace = polarSpaces.find((space) => space.id === spaceId);
+			let selectedSpace = Color.Space.all.find((space) => space.id === spaceId);
 			let coords = Object.entries(selectedSpace.coords);
 			let info = coords.map(([id, meta]) => `${ (meta.name ?? id)[0] }: ${ spaceId }.${ id }`).join(", ");
 
