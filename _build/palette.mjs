@@ -36,13 +36,14 @@ function process_palette (file, outputFile, {regex, parse}) {
 		for (let match of matches) {
 			let {hue, level, color} = match.groups;
 			ret[hue] ??= {};
+			level = level.replace(/^0+/, ""); // Leading zeroes throw off sorting
 			ret[hue][level] = color;
 		}
 
 		colors = matches.length;
 	}
 
-	write_palette (outputFile, ret, colors);
+	write_palette(outputFile, ret, colors);
 	return ret;
 }
 
@@ -51,8 +52,8 @@ function write_palette (outputFile, ret, colors) {
 	console.info(`Wrote ${ colors !== undefined? `${colors} colors and ` : ""}${ Object.keys(ret).length } groups to ${outputFile}`);
 }
 
-export function process_css_palette (file, outputFile) {
-	let regex = /^\s*--color-(?<hue>[a-z]+)-(?<level>[0-9]+):\s*(?<color>[^;]+);$/gm;
+export function process_css_palette (file, outputFile, { prefix = "--color"} = {}) {
+	let regex = new RegExp(`^\\s*${ prefix }-(?<hue>[a-z]+)-(?<level>[0-9]+):\\s*(?<color>[^;]+);$`, "gm");
 	return process_palette(file, outputFile, {regex});
 }
 
