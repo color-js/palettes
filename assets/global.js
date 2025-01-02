@@ -82,6 +82,8 @@ if (charts_h2 || scales_h2) {
 			}
 		}
 	}
+
+	// Trigger change events to update the charts and scales so they reflect the specified color space
+	select?.dispatchEvent(new Event("change"));
+	select2?.dispatchEvent(new Event("change"));
 }
-
-

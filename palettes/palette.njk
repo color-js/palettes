@@ -86,7 +86,7 @@ eleventyComputed:
 					<small>{{ hues[hue].type }}</small>
 					<input type="checkbox" aria-label="Plot?" checked onchange="document.body.classList.toggle('hide-{{ hue }}', !this.checked)">
 				</th>
-				<td><color-scale data-hue="{{ hue }}" colors="{{ scale | serializeObject }}" info="L: lch.l, C: lch.c, H: lch.h"></color-scale></td>
+				<td><color-scale data-hue="{{ hue }}" colors="{{ scale | serializeObject }}" info="L: oklch.l, C: oklch.c, H: oklch.h"></color-scale></td>
 			</tr>
 		{% endfor %}
 	</tbody>
