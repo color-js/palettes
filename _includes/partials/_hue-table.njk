@@ -1,4 +1,4 @@
-<table>
+<table class="hue-table">
 	<thead>
 		<tr>
 			<th>Name</th>
@@ -16,7 +16,7 @@
 				</th>
 				<td>
 					{{ (info.palettes | keys).length }}
-					<color-scale class="compact" colors="{{ info.accents | serializeObject }}"></color-scale>
+					<color-scale class="compact" colors="{{ info.accents | serializeObject }}" info="Hue: oklch.h, Cₘₐₓ: oklch.c"></color-scale>
 				</td>
 				<td>
 					<span style="white-space: nowrap">

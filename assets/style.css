@@ -10,7 +10,7 @@ table {
 
 	small {
 		display: block;
-		color: hsl(220, 10%, 48%);
+		color: hsl(220 10% 48%);
 		font-style: italic;
 		font-weight: normal;
 		font-family: var(--font-serif);
@@ -18,6 +18,39 @@ table {
 
 	th small {
 		text-transform: capitalize;
+	}
+
+	&.hue-table {
+		color-scale {
+			&::part(info) {
+				position: absolute;
+				bottom: .4em;
+				right: .1em;
+				color: hsl(220 10% 48%);
+				transition: 400ms;
+			}
+
+			@container (width >= 15em) {
+				&::part(info) {
+					display: flex;
+				}
+			}
+
+			@container (width < 15em) {
+				&::part(info) {
+					inset: auto;
+					top: 100%;
+					left: .1em;
+					z-index: 1;
+					background: canvas;
+					padding: .5em;
+				}
+			}
+
+			&:not(:hover)::part(info) {
+				opacity: 0;
+			}
+		}
 	}
 }
 
