@@ -7,6 +7,7 @@
 		</tr>
 	</thead>
 	<tbody>
+		{% set paletteCount = (palettes | keys) | length %}
 		{% for hue, info in hues %}
 		{% if info.palette_count > 1 %}
 			<tr>
@@ -14,8 +15,12 @@
 					<a href="{{ page | relative }}/hues/{{ hue }}/">{{ info.name }}</a>
 					<small>{{ info.type }}</small>
 				</th>
-				<td>{{ (info.palettes | keys).length }}</td>
-				<td style="width: 75%">
+				<td>
+					{% set count = info.palette_count %}
+					{{ count }}
+					<small>{{ (count/paletteCount) | number({style: 'percent'}) }}</small>
+				</td>
+				<td style="width: 70%">
 					<color-scale class="compact" colors="{{ info.accents | serializeObject }}" info="Hue: oklch.h, Cₘₐₓ: oklch.c"></color-scale>
 				</td>
 				<td>
