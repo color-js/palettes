@@ -12,9 +12,27 @@ export function unslugify (slug) {
 	return slug.replace(/(^|-)([a-z])/g, ($0, $1, $2) => ($1 ? " " : "") + $2.toUpperCase());
 }
 
+/**
+ * Convert any angle to the range [0, 360)
+ * @param {number} angle
+ * @returns {number}
+ */
+export function normalizeAngle (angle) {
+	return (angle % 360 + 360) % 360;
+}
+
 export function number (value, options) {
 	if (typeof value !== "number" && isNaN(value)) {
 		return value;
+	}
+
+	if (options?.style === "angle") {
+		value = normalizeAngle(value);
+		delete options.style;
+	}
+
+	if (!options || Object.keys(options).length === 0) {
+		options = { maximumSignificantDigits: 3 };
 	}
 
 	return Number(value).toLocaleString("en", options);

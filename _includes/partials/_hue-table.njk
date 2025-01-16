@@ -3,7 +3,7 @@
 		<tr>
 			<th>Name</th>
 			<th style="width: 75%">Palettes</th>
-			<th>Hue</th>
+			<th>Hues</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -18,9 +18,16 @@
 					{{ (info.palettes | keys).length }}
 					<color-scale class="compact" colors="{{ info.examples | serializeObject }}"></color-scale>
 				</td>
-				<td>{{ info.hue.mean | number }}
-				<small>{{ info.hue.min | number }} &ndash; {{ info.hue.max | number }}</small>
-				<small>σ = {{ info.hue.stddev | number({maximumFractionDigits: 1}) }}</small>
+				<td>
+					<span style="white-space: nowrap">
+					<strong>{{ info.hue.mean | number({style: 'angle'}) }}</strong>
+					{% set range = info.hue.mean - info.hue.min %}
+					±{{ range | number({maximumSignificantDigits: 2}) }}
+					</span>
+					<small>{{ info.hue.min | number({style: 'angle'}) }}
+						&ndash;
+						{{ info.hue.max | number({style: 'angle'}) }}</small>
+					<small>σ = {{ info.hue.stddev | number({maximumSignificantDigits: 2}) }}</small>
 				</td>
 			</tr>
 		{% endif %}
