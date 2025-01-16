@@ -79,13 +79,17 @@ for (let palette of palettes) {
 				}
 				return max;
 			});
+			const ε = 0.001;
+
 			let midColors = hueColors.slice(Math.floor(hueColors.length / 2), Math.ceil(hueColors.length / 2) + 1);
+			// Peak chroma is unreliable for neutrals
+			let accentColor = maxChroma < ε? midColors[Math.floor((midColors.length - 1) / 2)] : maxChromaColor;
 
 			let colors = midColors.map(str => new Color(str).to("oklch"));
 			let hueValues = colors.map(c => c.get("h")).filter(h => Number.isFinite(h)).map(h => h + 360);
 			hues[hue].hue.push(...hueValues);
 			hues[hue].chroma.push(...colors.map(c => c.get("c")).filter(c => Number.isFinite(c)));
-			hues[hue].accents[palette.id] = maxChromaColor;
+			hues[hue].accents[palette.id] = accentColor + "";
 		}
 	}
 
