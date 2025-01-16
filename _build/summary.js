@@ -104,13 +104,13 @@ for (let hue in hues) {
 	let data = hues[hue];
 
 	for (let coord of ["hue", "chroma"]) {
-		let values = data[coord];
-
+		let values = filters.normalizeAngle(data[coord]);
 		let min = filters.min(values);
 		let max = filters.max(values);
+
 		data[coord] = {
 			min, max,
-			midrange: (min + max) / 2,
+			mid: (min + max) / 2,
 			mean: filters.mean(values),
 			median: filters.median(values),
 			stddev: filters.stddev(values),

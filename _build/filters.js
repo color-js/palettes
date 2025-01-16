@@ -15,10 +15,46 @@ export function unslugify (slug) {
 /**
  * Convert any angle to the range [0, 360)
  * @param {number} angle
- * @returns {number}
+ * @returns {number} Normalized angle
+ *
+ * @overload
+ * @param {number[]} angles
+ * @returns {number[]} Normalized angles
  */
-export function normalizeAngle (angle) {
-	return (angle % 360 + 360) % 360;
+export function normalizeAngle (angles) {
+	if (!angles) {
+		return NaN;
+	}
+
+	if (typeof angles === "number") {
+		return (angles % 360 + 360) % 360;
+	}
+
+	// First step is to normalize individually
+	angles = angles.map(angle => normalizeAngle(angle));
+
+	if (angles.length === 1) {
+		// If only one angle, we're done
+		return angles;
+	}
+
+	// Multiple angles. Normalize in a way that will keep them closer together, even if slightly out of range.
+	// Remove top and bottom 25% and find average
+	for (let i = 0; i < angles.length; i++) {
+		let h = angles[i];
+		let prevAngle = angles[i - 1];
+		let delta = h - prevAngle;
+
+		if (Math.abs(delta) > 180) {
+			let equivalent = [h + 360, h - 360];
+			let isNextCloser = Math.abs(equivalent[0] - prevAngle) <= Math.abs(equivalent[1] - prevAngle);
+
+			// Offset hue to minimize difference in the direction that brings it closer to the average
+			angles[i] = equivalent[isNextCloser ? 0 : 1];
+		}
+	}
+
+	return angles;
 }
 
 export function number (value, options) {

@@ -20,13 +20,13 @@
 				</td>
 				<td>
 					<span style="white-space: nowrap">
-					<strong>{{ info.hue.mean | number({style: 'angle'}) }}</strong>
+					<strong>{{ info.hue.mean | number }}</strong>
 					{% set range = info.hue.mean - info.hue.min %}
 					±{{ range | number({maximumSignificantDigits: 2}) }}
 					</span>
-					<small>{{ info.hue.min | number({style: 'angle'}) }}
+					<small>{{ info.hue.min | number }}
 						&ndash;
-						{{ info.hue.max | number({style: 'angle'}) }}</small>
+						{{ info.hue.max | number }}</small>
 					<small>σ = {{ info.hue.stddev | number({maximumSignificantDigits: 2}) }}</small>
 				</td>
 			</tr>
