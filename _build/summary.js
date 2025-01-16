@@ -61,23 +61,31 @@ for (let palette of palettes) {
 					hue: [],
 					chroma: [],
 					palettes: {},
-					examples: {},
+					accents: {},
 				};
 			}
 
 			hues[hue].palettes[palette.id] = hueColors;
 			hueColors = Object.values(hueColors);
+			let lchColors = hueColors.map(str => new Color(str).to("oklch"));
 
 			// Extract the 2-3 middle colors
+			let maxChroma = 0;
+			let maxChromaColor = lchColors.reduce((max, color, i) => {
+				let chroma = color.get("c");
+				if (chroma > maxChroma) {
+					maxChroma = chroma;
+					return hueColors[i];
+				}
+				return max;
+			});
 			let midColors = hueColors.slice(Math.floor(hueColors.length / 2), Math.ceil(hueColors.length / 2) + 1);
 
 			let colors = midColors.map(str => new Color(str).to("oklch"));
 			let hueValues = colors.map(c => c.get("h")).filter(h => Number.isFinite(h)).map(h => h + 360);
 			hues[hue].hue.push(...hueValues);
 			hues[hue].chroma.push(...colors.map(c => c.get("c")).filter(c => Number.isFinite(c)));
-
-
-			hues[hue].examples[palette.id] = midColors[Math.floor((midColors.length - 1) / 2)] + "";
+			hues[hue].accents[palette.id] = maxChromaColor;
 		}
 	}
 

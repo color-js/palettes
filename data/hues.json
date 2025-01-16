@@ -133,15 +133,15 @@
 				"950": "#1c0d06"
 			}
 		},
-		"examples": {
-			"opencolor": "#ff6b6b",
-			"openprops": "#fa5252",
-			"tailwind": "#ef4444",
+		"accents": {
+			"opencolor": "#f03e3e",
+			"openprops": "#f03e3e",
+			"tailwind": "#dc2626",
 			"material": "#f44336",
-			"spectrum": "rgb(234, 56, 41)",
-			"primer": "#cf222e",
+			"spectrum": "rgb(211, 21, 16)",
+			"primer": "#fa4549",
 			"carbon": "#da1e28",
-			"pico": "#d93526"
+			"pico": "#ee402e"
 		},
 		"palette_count": 8
 	},
@@ -279,13 +279,13 @@
 				"950": "#080f2d"
 			}
 		},
-		"examples": {
-			"opencolor": "#339af0",
+		"accents": {
+			"opencolor": "#228be6",
 			"openprops": "#228be6",
-			"tailwind": "#3b82f6",
+			"tailwind": "#1d4ed8",
 			"material": "#2196f3",
 			"spectrum": "rgb(20, 122, 243)",
-			"primer": "#0969da",
+			"primer": "#218bff",
 			"carbon": "#0f62fe",
 			"pico": "#3c71f7"
 		},
@@ -425,15 +425,15 @@
 				"950": "#0b1305"
 			}
 		},
-		"examples": {
-			"opencolor": "#51cf66",
+		"accents": {
+			"opencolor": "#40c057",
 			"openprops": "#40c057",
 			"tailwind": "#22c55e",
 			"material": "#4caf50",
-			"spectrum": "rgb(0, 143, 93)",
-			"primer": "#1a7f37",
-			"carbon": "#198038",
-			"pico": "#398712"
+			"spectrum": "rgb(47, 184, 128)",
+			"primer": "#4ac26b",
+			"carbon": "#42be65",
+			"pico": "#77ef3d"
 		},
 		"palette_count": 8
 	},
@@ -571,15 +571,15 @@
 				"950": "#141103"
 			}
 		},
-		"examples": {
+		"accents": {
 			"opencolor": "#fcc419",
-			"openprops": "#fab005",
-			"tailwind": "#eab308",
+			"openprops": "#fcc419",
+			"tailwind": "#facc15",
 			"material": "#ffeb3b",
-			"spectrum": "rgb(155, 120, 0)",
-			"primer": "#9a6700",
-			"carbon": "#8e6a00",
-			"pico": "#827800"
+			"spectrum": "rgb(248, 217, 4)",
+			"primer": "#d4a72c",
+			"carbon": "#f1c21b",
+			"pico": "#f2df0d"
 		},
 		"palette_count": 8
 	},
@@ -717,15 +717,15 @@
 				"950": "#1b0d06"
 			}
 		},
-		"examples": {
-			"opencolor": "#ff922b",
-			"openprops": "#fd7e14",
-			"tailwind": "#f97316",
-			"material": "#ff9800",
-			"spectrum": "rgb(203, 93, 0)",
-			"primer": "#bc4c00",
-			"carbon": "#ba4e00",
-			"pico": "#d24317"
+		"accents": {
+			"opencolor": "#f76707",
+			"openprops": "#f76707",
+			"tailwind": "#ea580c",
+			"material": "#e65100",
+			"spectrum": "rgb(246, 133, 17)",
+			"primer": "#e16f24",
+			"carbon": "#eb6200",
+			"pico": "#e74b1a"
 		},
 		"palette_count": 8
 	},
@@ -851,14 +851,14 @@
 				"950": "#041413"
 			}
 		},
-		"examples": {
+		"accents": {
 			"opencolor": "#22b8cf",
-			"openprops": "#15aabf",
-			"tailwind": "#06b6d4",
+			"openprops": "#22b8cf",
+			"tailwind": "#22d3ee",
 			"material": "#00bcd4",
-			"spectrum": "rgb(0, 134, 180)",
-			"carbon": "#0072c3",
-			"pico": "#058686"
+			"spectrum": "rgb(18, 176, 218)",
+			"carbon": "#1192e8",
+			"pico": "#3deceb"
 		},
 		"palette_count": 7
 	},
@@ -984,14 +984,14 @@
 				"950": "#1e0820"
 			}
 		},
-		"examples": {
+		"accents": {
 			"openprops": "#be4bdb",
-			"tailwind": "#a855f7",
+			"tailwind": "#9333ea",
 			"material": "#9c27b0",
-			"spectrum": "rgb(157, 87, 244)",
+			"spectrum": "rgb(137, 61, 231)",
 			"primer": "#8250df",
 			"carbon": "#8a3ffc",
-			"pico": "#b645cd"
+			"pico": "#c652dc"
 		},
 		"palette_count": 7
 	},
@@ -1101,13 +1101,13 @@
 				"950": "#25060c"
 			}
 		},
-		"examples": {
-			"opencolor": "#f06595",
-			"openprops": "#e64980",
-			"tailwind": "#ec4899",
+		"accents": {
+			"opencolor": "#d6336c",
+			"openprops": "#d6336c",
+			"tailwind": "#db2777",
 			"material": "#e91e63",
-			"primer": "#bf3989",
-			"pico": "#d92662"
+			"primer": "#e85aad",
+			"pico": "#f42c6f"
 		},
 		"palette_count": 6
 	},
@@ -1221,13 +1221,13 @@
 				"950": "#110b31"
 			}
 		},
-		"examples": {
-			"opencolor": "#5c7cfa",
-			"openprops": "#4c6ef5",
-			"tailwind": "#6366f1",
+		"accents": {
+			"opencolor": "#4263eb",
+			"openprops": "#4263eb",
+			"tailwind": "#4f46e5",
 			"material": "#3f51b5",
-			"spectrum": "rgb(104, 109, 244)",
-			"pico": "#7569da"
+			"spectrum": "rgb(82, 88, 228)",
+			"pico": "#524ed2"
 		},
 		"palette_count": 6
 	},
@@ -1316,12 +1316,12 @@
 				"100": "#081a1c"
 			}
 		},
-		"examples": {
+		"accents": {
 			"opencolor": "#20c997",
-			"openprops": "#12b886",
-			"tailwind": "#14b8a6",
+			"openprops": "#20c997",
+			"tailwind": "#2dd4bf",
 			"material": "#009688",
-			"carbon": "#007d79"
+			"carbon": "#3ddbd9"
 		},
 		"palette_count": 5
 	},
@@ -1419,12 +1419,12 @@
 				"950": "#101203"
 			}
 		},
-		"examples": {
+		"accents": {
 			"opencolor": "#94d82d",
-			"openprops": "#82c91e",
-			"tailwind": "#84cc16",
+			"openprops": "#94d82d",
+			"tailwind": "#a3e635",
 			"material": "#cddc39",
-			"pico": "#628100"
+			"pico": "#b2e51a"
 		},
 		"palette_count": 5
 	},
@@ -1514,12 +1514,12 @@
 				"100": "#161616"
 			}
 		},
-		"examples": {
-			"opencolor": "#adb5bd",
+		"accents": {
+			"opencolor": "#868e96",
 			"openprops": "#868e96",
-			"tailwind": "#6b7280",
-			"spectrum": "rgb(177, 177, 177)",
-			"carbon": "#6f6f6f"
+			"tailwind": "#111827",
+			"spectrum": "rgb(144, 144, 144)",
+			"carbon": "#c6c6c6"
 		},
 		"palette_count": 5
 	},
@@ -1605,11 +1605,11 @@
 				"950": "#190928"
 			}
 		},
-		"examples": {
-			"opencolor": "#845ef7",
+		"accents": {
+			"opencolor": "#7950f2",
 			"openprops": "#7950f2",
-			"tailwind": "#8b5cf6",
-			"pico": "#9062ca"
+			"tailwind": "#7c3aed",
+			"pico": "#7540bf"
 		},
 		"palette_count": 4
 	},
@@ -1680,10 +1680,10 @@
 				"950": "#161003"
 			}
 		},
-		"examples": {
+		"accents": {
 			"tailwind": "#f59e0b",
-			"material": "#ffc107",
-			"pico": "#977000"
+			"material": "#ff6f00",
+			"pico": "#ffbf00"
 		},
 		"palette_count": 3
 	},
@@ -1758,10 +1758,10 @@
 				"950": "#230518"
 			}
 		},
-		"examples": {
+		"accents": {
 			"tailwind": "#d946ef",
 			"spectrum": "rgb(205, 58, 206)",
-			"pico": "#d9269d"
+			"pico": "#ed2aac"
 		},
 		"palette_count": 3
 	},
@@ -1813,7 +1813,7 @@
 				"900": "#3e2723"
 			}
 		},
-		"examples": {
+		"accents": {
 			"openprops": "#a87c56",
 			"material": "#795548"
 		},
@@ -1874,9 +1874,9 @@
 				"950": "#0e1118"
 			}
 		},
-		"examples": {
+		"accents": {
 			"tailwind": "#64748b",
-			"pico": "#687899"
+			"pico": "#7385a9"
 		},
 		"palette_count": 2
 	},
@@ -1929,7 +1929,7 @@
 				"100": "#2a0a18"
 			}
 		},
-		"examples": {
+		"accents": {
 			"spectrum": "rgb(222, 61, 130)",
 			"carbon": "#d02670"
 		},
@@ -1992,9 +1992,9 @@
 				"950": "#111110"
 			}
 		},
-		"examples": {
-			"openprops": "#867c65",
-			"pico": "#7b776b"
+		"accents": {
+			"openprops": "#9a9178",
+			"pico": "#ccc6b4"
 		},
 		"palette_count": 2
 	},
@@ -2047,8 +2047,8 @@
 				"950": "#0c0a09"
 			}
 		},
-		"examples": {
-			"openprops": "#979b9d",
+		"accents": {
+			"openprops": "#252521",
 			"tailwind": "#78716c"
 		},
 		"palette_count": 2
@@ -2108,9 +2108,9 @@
 				"950": "#0f1114"
 			}
 		},
-		"examples": {
-			"tailwind": "#71717a",
-			"pico": "#6f7887"
+		"accents": {
+			"tailwind": "#52525b",
+			"pico": "#8891a4"
 		},
 		"palette_count": 2
 	},
@@ -2160,9 +2160,9 @@
 				"9": "#24292f"
 			}
 		},
-		"examples": {
-			"tailwind": "#737373",
-			"primer": "#6e7781"
+		"accents": {
+			"tailwind": "#f5f5f5",
+			"primer": "#57606a"
 		},
 		"palette_count": 2
 	},
@@ -2220,9 +2220,9 @@
 				"950": "#111111"
 			}
 		},
-		"examples": {
-			"material": "#9e9e9e",
-			"pico": "#777777"
+		"accents": {
+			"material": "#f5f5f5",
+			"pico": "#c6c6c6"
 		},
 		"palette_count": 2
 	},
@@ -2259,8 +2259,8 @@
 				"9": "#862e9c"
 			}
 		},
-		"examples": {
-			"opencolor": "#cc5de8"
+		"accents": {
+			"opencolor": "#be4bdb"
 		},
 		"palette_count": 1
 	},
@@ -2300,8 +2300,8 @@
 				"12": "#36300a"
 			}
 		},
-		"examples": {
-			"openprops": "#999621"
+		"accents": {
+			"openprops": "#c2ce34"
 		},
 		"palette_count": 1
 	},
@@ -2341,7 +2341,7 @@
 				"12": "#3d210d"
 			}
 		},
-		"examples": {
+		"accents": {
 			"openprops": "#d46e25"
 		},
 		"palette_count": 1
@@ -2382,8 +2382,8 @@
 				"12": "#3d4d04"
 			}
 		},
-		"examples": {
-			"openprops": "#9bbb36"
+		"accents": {
+			"openprops": "#8fb024"
 		},
 		"palette_count": 1
 	},
@@ -2421,8 +2421,8 @@
 				"950": "#022c22"
 			}
 		},
-		"examples": {
-			"tailwind": "#10b981"
+		"accents": {
+			"tailwind": "#34d399"
 		},
 		"palette_count": 1
 	},
@@ -2460,7 +2460,7 @@
 				"950": "#082f49"
 			}
 		},
-		"examples": {
+		"accents": {
 			"tailwind": "#0ea5e9"
 		},
 		"palette_count": 1
@@ -2499,8 +2499,8 @@
 				"950": "#4c0519"
 			}
 		},
-		"examples": {
-			"tailwind": "#f43f5e"
+		"accents": {
+			"tailwind": "#e11d48"
 		},
 		"palette_count": 1
 	},
@@ -2541,8 +2541,8 @@
 				"1400": "rgb(24, 31, 0)"
 			}
 		},
-		"examples": {
-			"spectrum": "rgb(103, 136, 0)"
+		"accents": {
+			"spectrum": "rgb(188, 233, 42)"
 		},
 		"palette_count": 1
 	},
@@ -2583,8 +2583,8 @@
 				"1400": "rgb(0, 34, 5)"
 			}
 		},
-		"examples": {
-			"spectrum": "rgb(0, 145, 18)"
+		"accents": {
+			"spectrum": "rgb(39, 187, 54)"
 		},
 		"palette_count": 1
 	},
@@ -2625,8 +2625,8 @@
 				"1400": "rgb(15, 31, 30)"
 			}
 		},
-		"examples": {
-			"spectrum": "rgb(0, 140, 135)"
+		"accents": {
+			"spectrum": "rgb(15, 181, 174)"
 		},
 		"palette_count": 1
 	},
@@ -2663,8 +2663,8 @@
 				"9": "#510901"
 			}
 		},
-		"examples": {
-			"primer": "#c4432b"
+		"accents": {
+			"primer": "#ec6547"
 		},
 		"palette_count": 1
 	},
@@ -2710,8 +2710,8 @@
 				"950": "#04121d"
 			}
 		},
-		"examples": {
-			"pico": "#017fc0"
+		"accents": {
+			"pico": "#01aaff"
 		},
 		"palette_count": 1
 	},
@@ -2757,8 +2757,8 @@
 				"950": "#04140c"
 			}
 		},
-		"examples": {
-			"pico": "#00895a"
+		"accents": {
+			"pico": "#39f1a6"
 		},
 		"palette_count": 1
 	},
@@ -2804,8 +2804,8 @@
 				"950": "#180f04"
 			}
 		},
-		"examples": {
-			"pico": "#ad6400"
+		"accents": {
+			"pico": "#ff9500"
 		},
 		"palette_count": 1
 	},
@@ -2841,8 +2841,8 @@
 				"900": "rgb(255, 255, 255)"
 			}
 		},
-		"examples": {
-			"spectrum": "rgba(255, 255, 255, 0.55)"
+		"accents": {
+			"spectrum": "rgba(255, 255, 255, 0.1)"
 		},
 		"palette_count": 1
 	},
@@ -2878,8 +2878,16 @@
 				"900": "rgb(0, 0, 0)"
 			}
 		},
-		"examples": {
-			"spectrum": "rgba(0, 0, 0, 0.55)"
+		"accents": {
+			"spectrum": {
+				"spaceId": "oklch",
+				"coords": [
+					0,
+					0,
+					null
+				],
+				"alpha": 0
+			}
 		},
 		"palette_count": 1
 	},
@@ -2916,8 +2924,8 @@
 				"100": "#121619"
 			}
 		},
-		"examples": {
-			"carbon": "#697077"
+		"accents": {
+			"carbon": "#878d96"
 		},
 		"palette_count": 1
 	},
@@ -2954,8 +2962,8 @@
 				"100": "#171414"
 			}
 		},
-		"examples": {
-			"carbon": "#726e6e"
+		"accents": {
+			"carbon": "#565151"
 		},
 		"palette_count": 1
 	}
