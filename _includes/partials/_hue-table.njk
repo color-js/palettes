@@ -2,7 +2,7 @@
 	<thead>
 		<tr>
 			<th>Name</th>
-			<th style="width: 75%">Palettes</th>
+			<th colspan="2">Palettes</th>
 			<th>Hues</th>
 		</tr>
 	</thead>
@@ -14,8 +14,8 @@
 					<a href="{{ page | relative }}/hues/{{ hue }}/">{{ info.name }}</a>
 					<small>{{ info.type }}</small>
 				</th>
-				<td>
-					{{ (info.palettes | keys).length }}
+				<td>{{ (info.palettes | keys).length }}</td>
+				<td style="width: 75%">
 					<color-scale class="compact" colors="{{ info.accents | serializeObject }}" info="Hue: oklch.h, Cₘₐₓ: oklch.c"></color-scale>
 				</td>
 				<td>

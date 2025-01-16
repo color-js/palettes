@@ -39,11 +39,12 @@ table {
 			@container (width < 15em) {
 				&::part(info) {
 					inset: auto;
-					top: 100%;
-					left: .1em;
-					z-index: 1;
-					background: canvas;
-					padding: .5em;
+					left: 50%;
+					translate: -50% 0;
+					top: .8em;
+					z-index: 2;
+					--l: clamp(0, (l / var(--l-threshold, 0.65) - 1) * -infinity, 1);
+					color: oklch(from var(--color) var(--l) 0 h);
 				}
 			}
 
