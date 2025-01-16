@@ -1,0 +1,25 @@
+<table class="hue-table">
+	<thead>
+		<tr>
+			<th>Name</th>
+			<th colspan="2">Hues</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for id, palette in palettes %}
+
+			<tr>
+				<th>
+					<a href="{{ page | relative }}/palettes/{{ id }}/">{{ palette.name }}</a>
+				</th>
+				<td>
+					{% set count = palette.count.hue + palette.count.neutral  %}
+					{{ count }}
+				</td>
+				<td style="width: 70%">
+					<color-scale class="compact" colors="{{ palette.accents | serializeObject }}" info="Hue: oklch.h, Cₘₐₓ: oklch.c"></color-scale>
+				</td>
+			</tr>
+		{% endfor %}
+	</tbody>
+</table>

@@ -89,7 +89,9 @@ for (let palette of palettes) {
 			let hueValues = colors.map(c => c.get("h")).filter(h => Number.isFinite(h)).map(h => h + 360);
 			hues[hue].hue.push(...hueValues);
 			hues[hue].chroma.push(...colors.map(c => c.get("c")).filter(c => Number.isFinite(c)));
+			palette.accents ??= {};
 			hues[hue].accents[palette.id] = accentColor + "";
+			palette.accents[hue] = accentColor + "";
 		}
 	}
 

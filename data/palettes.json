@@ -20,6 +20,21 @@
 				"max": 10
 			}
 		},
+		"accents": {
+			"gray": "#868e96",
+			"red": "#f03e3e",
+			"pink": "#d6336c",
+			"grape": "#be4bdb",
+			"violet": "#7950f2",
+			"indigo": "#4263eb",
+			"blue": "#228be6",
+			"cyan": "#22b8cf",
+			"teal": "#20c997",
+			"green": "#40c057",
+			"lime": "#94d82d",
+			"yellow": "#fcc419",
+			"orange": "#f76707"
+		},
 		"colors": {
 			"red": {
 				"0": "#fff5f5",
@@ -892,6 +907,27 @@
 				"min": 13,
 				"max": 13
 			}
+		},
+		"accents": {
+			"blue": "#228be6",
+			"brown": "#a87c56",
+			"camo": "#c2ce34",
+			"choco": "#d46e25",
+			"cyan": "#22b8cf",
+			"gray": "#868e96",
+			"green": "#40c057",
+			"indigo": "#4263eb",
+			"jungle": "#8fb024",
+			"lime": "#94d82d",
+			"orange": "#f76707",
+			"pink": "#d6336c",
+			"purple": "#be4bdb",
+			"red": "#f03e3e",
+			"sand": "#9a9178",
+			"stone": "#252521",
+			"teal": "#20c997",
+			"violet": "#7950f2",
+			"yellow": "#fcc419"
 		},
 		"colors": {
 			"blue": {
@@ -2476,6 +2512,30 @@
 				"max": 11
 			}
 		},
+		"accents": {
+			"slate": "#64748b",
+			"gray": "#111827",
+			"zinc": "#52525b",
+			"neutral": "#737373",
+			"stone": "#78716c",
+			"red": "#dc2626",
+			"orange": "#ea580c",
+			"amber": "#f59e0b",
+			"yellow": "#facc15",
+			"lime": "#a3e635",
+			"green": "#22c55e",
+			"emerald": "#34d399",
+			"teal": "#2dd4bf",
+			"cyan": "#22d3ee",
+			"sky": "#0ea5e9",
+			"blue": "#1d4ed8",
+			"indigo": "#4f46e5",
+			"violet": "#7c3aed",
+			"purple": "#9333ea",
+			"fuchsia": "#d946ef",
+			"pink": "#db2777",
+			"rose": "#e11d48"
+		},
 		"colors": {
 			"red": {
 				"50": "#fef2f2",
@@ -4041,6 +4101,22 @@
 				"max": 10
 			}
 		},
+		"accents": {
+			"red": "#f44336",
+			"pink": "#e91e63",
+			"purple": "#9c27b0",
+			"indigo": "#3f51b5",
+			"blue": "#2196f3",
+			"cyan": "#00bcd4",
+			"teal": "#009688",
+			"green": "#4caf50",
+			"lime": "#cddc39",
+			"yellow": "#ffeb3b",
+			"amber": "#ff6f00",
+			"orange": "#e65100",
+			"brown": "#795548",
+			"grey": "#9e9e9e"
+		},
 		"colors": {
 			"red": {
 				"50": "#ffebee",
@@ -4962,6 +5038,24 @@
 				"min": 9,
 				"max": 14
 			}
+		},
+		"accents": {
+			"transparent-white": "rgba(255, 255, 255, 0.55)",
+			"transparent-black": "rgba(0, 0, 0, 0.55)",
+			"gray": "rgb(177, 177, 177)",
+			"blue": "rgb(20, 122, 243)",
+			"red": "rgb(211, 21, 16)",
+			"orange": "rgb(246, 133, 17)",
+			"yellow": "rgb(248, 217, 4)",
+			"chartreuse": "rgb(188, 233, 42)",
+			"celery": "rgb(39, 187, 54)",
+			"green": "rgb(47, 184, 128)",
+			"seafoam": "rgb(15, 181, 174)",
+			"cyan": "rgb(18, 176, 218)",
+			"indigo": "rgb(82, 88, 228)",
+			"purple": "rgb(137, 61, 231)",
+			"fuchsia": "rgb(205, 58, 206)",
+			"magenta": "rgb(222, 61, 130)"
 		},
 		"colors": {
 			"blue": {
@@ -6335,6 +6429,17 @@
 				"max": 10
 			}
 		},
+		"accents": {
+			"neutral": "#57606a",
+			"blue": "#218bff",
+			"green": "#4ac26b",
+			"yellow": "#d4a72c",
+			"orange": "#e16f24",
+			"red": "#fa4549",
+			"purple": "#8250df",
+			"pink": "#e85aad",
+			"coral": "#ec6547"
+		},
 		"colors": {
 			"blue": {
 				"0": "#ddf4ff",
@@ -6958,6 +7063,20 @@
 				"min": 10,
 				"max": 10
 			}
+		},
+		"accents": {
+			"blue": "#0f62fe",
+			"coolGray": "#878d96",
+			"cyan": "#1192e8",
+			"gray": "#6f6f6f",
+			"green": "#42be65",
+			"magenta": "#d02670",
+			"orange": "#eb6200",
+			"purple": "#8a3ffc",
+			"red": "#da1e28",
+			"teal": "#3ddbd9",
+			"warmGray": "#565151",
+			"yellow": "#f1c21b"
 		},
 		"colors": {
 			"blue": {
@@ -7768,6 +7887,28 @@
 				"min": 19,
 				"max": 19
 			}
+		},
+		"accents": {
+			"red": "#ee402e",
+			"pink": "#f42c6f",
+			"fuchsia": "#ed2aac",
+			"purple": "#c652dc",
+			"violet": "#7540bf",
+			"indigo": "#524ed2",
+			"blue": "#3c71f7",
+			"azure": "#01aaff",
+			"cyan": "#3deceb",
+			"jade": "#39f1a6",
+			"green": "#77ef3d",
+			"lime": "#b2e51a",
+			"yellow": "#f2df0d",
+			"amber": "#ffbf00",
+			"pumpkin": "#ff9500",
+			"orange": "#e74b1a",
+			"sand": "#ccc6b4",
+			"grey": "#777777",
+			"zinc": "#8891a4",
+			"slate": "#7385a9"
 		},
 		"colors": {
 			"red": {
