@@ -26,6 +26,10 @@
 		"Lea Verou",
 		"Chris Lilley"
 	],
+	"funding": {
+		"type": "opencollective",
+		"url": "https://opencollective.com/color"
+	},
 	"license": "MIT",
 	"bugs": {
 		"url": "https://github.com/color-js/palettes/issues"
