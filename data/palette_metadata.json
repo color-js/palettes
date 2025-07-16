@@ -16,6 +16,12 @@
 		"data": "https://github.com/tailwindlabs/tailwindcss/blob/2fedbe0194c0e5c8e5ba76974c2eb523b4e252d0/packages/tailwindcss/theme.css"
 	},
 	{
+		"id": "tailwind-v4",
+		"name": "Tailwind CSS v4",
+		"url": "https://tailwindcss.com/docs/colors",
+		"data": "https://github.com/tailwindlabs/tailwindcss/blob/main/packages/tailwindcss/theme.css"
+	},
+	{
 		"id": "material",
 		"name": "Material Design",
 		"data": "https://github.com/material-components/material-components-web/blob/cfec83c749a1b6b6602c4d2fa474d3e776e7c97b/packages/mdc-theme/_color-palette.scss#L96"
@@ -51,5 +57,11 @@
 	{
 		"name": "Reasonable Colors",
 		"url": "https://reasonable.work/colors/"
+	},
+	{
+		"id": "webawesome",
+		"name": "Web Awesome",
+		"url": "https://webawesome.com/docs/color-palettes",
+		"data": "https://github.com/shoelace-style/webawesome/blob/next/packages/webawesome/src/styles/color/palettes/default.css"
 	}
 ]
