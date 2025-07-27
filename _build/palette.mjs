@@ -28,7 +28,7 @@ function process_palette (file, outputFile, {regex, parse}) {
 		matches = [...matches];
 
 		if (matches.length === 0) {
-			throw new Error("Cound not extract colors from ", file);
+			throw new Error("Could not extract colors from ", file);
 		}
 
 		ret = {};
@@ -37,6 +37,8 @@ function process_palette (file, outputFile, {regex, parse}) {
 			let {hue, level, color} = match.groups;
 			ret[hue] ??= {};
 			level = level.replace(/^0+/, ""); // Leading zeroes throw off sorting
+			// Drop comments
+			color = color.replace(/\/\*.*?\*\//g, "").trim();
 			ret[hue][level] = color;
 		}
 
@@ -52,8 +54,8 @@ function write_palette (outputFile, ret, colors) {
 	console.info(`Wrote ${ colors !== undefined? `${colors} colors and ` : ""}${ Object.keys(ret).length } groups to ${outputFile}`);
 }
 
-export function process_css_palette (file, outputFile, { prefix = "--color"} = {}) {
-	let regex = new RegExp(`^\\s*${ prefix }-(?<hue>[a-z]+)-(?<level>[0-9]+):\\s*(?<color>[^;]+);$`, "gm");
+export function process_css_palette (file, outputFile, { prefix = "--color-"} = {}) {
+	let regex = new RegExp(`^\\s*${ prefix }(?<hue>[a-z]+)-(?<level>[0-9]+):\\s*(?<color>[^;]+);$`, "gm");
 	return process_palette(file, outputFile, {regex});
 }
 
