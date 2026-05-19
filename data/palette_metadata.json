@@ -27,6 +27,12 @@
 		"data": "https://github.com/material-components/material-components-web/blob/cfec83c749a1b6b6602c4d2fa474d3e776e7c97b/packages/mdc-theme/_color-palette.scss#L96"
 	},
 	{
+		"id": "fluent",
+		"name": "Fluent UI",
+		"url": "https://fluent2.microsoft.design/color",
+		"data": "https://github.com/microsoft/fluentui/blob/master/packages/tokens/src/global/colors.ts"
+	},
+	{
 		"id": "spectrum",
 		"name": "Adobe Spectrum",
 		"url": "https://spectrum.adobe.com/page/color-palette/",
