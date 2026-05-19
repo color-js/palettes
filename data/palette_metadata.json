@@ -61,6 +61,12 @@
 		"url": "https://stephango.com/flexoki"
 	},
 	{
+		"id": "geist",
+		"name": "Geist",
+		"url": "https://vercel.com/geist/colors",
+		"data": "https://github.com/ephraimduncan/geist-colors/blob/main/src/light.ts"
+	},
+	{
 		"name": "Reasonable Colors",
 		"url": "https://reasonable.work/colors/"
 	},
