@@ -48,20 +48,20 @@ function update (source) {
 	}
 }
 
-Promise.all(
-	["space-picker", "color-chart", "color-scale"].map(tag =>
+let spaceId = params.get("space");
+
+for (let picker of pickers) {
+	picker.groupBy = groupBy;
+	if (spaceId) {
+		picker.value = spaceId;
+	}
+	picker.addEventListener("spacechange", () => update(picker));
+}
+
+await Promise.all(
+	["space-picker", "color-chart", "color-scale"].map((tag) =>
 		customElements.whenDefined(tag),
 	),
-).then(() => {
-	let spaceId = params.get("space");
+);
 
-	for (let picker of pickers) {
-		picker.groupBy = groupBy;
-		if (spaceId) {
-			picker.value = spaceId;
-		}
-		picker.addEventListener("spacechange", () => update(picker));
-	}
-
-	pickers[0] && update(pickers[0]);
-});
+pickers[0] && update(pickers[0]);
