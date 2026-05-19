@@ -39,6 +39,12 @@
 		"data": "https://github.com/primer/primitives/blob/c5599c015b5c05f6a115d5725ce26be4cc1a0a8b/src/tokens/base/color/light/light.json5"
 	},
 	{
+		"id": "polaris",
+		"name": "Shopify Polaris",
+		"url": "https://polaris.shopify.com/tokens/colors",
+		"data": "https://github.com/Shopify/polaris/blob/main/polaris-tokens/src/colors.ts"
+	},
+	{
 		"id": "carbon",
 		"name": "IBM Carbon",
 		"url": "https://www.ibm.com/design/language/color/",
