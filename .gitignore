@@ -1,4 +1,6 @@
 node_modules
 **/index.html
+client_modules
+importmap.js
 
 .DS_Store
