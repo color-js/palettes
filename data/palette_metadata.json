@@ -51,6 +51,12 @@
 		"data": "https://github.com/carbon-design-system/carbon/blob/v10/packages/colors/src/colors.js"
 	},
 	{
+		"id": "atlassian",
+		"name": "Atlassian Design System",
+		"url": "https://atlassian.design/foundations/color-new/color-palette-new",
+		"data": "https://bitbucket.org/atlassian/atlassian-frontend-mirror/src/master/design-system/tokens/src/artifacts/palettes-raw/palette.tsx"
+	},
+	{
 		"name": "Flexoki",
 		"url": "https://stephango.com/flexoki"
 	},
