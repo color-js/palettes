@@ -1,3 +1,5 @@
+import { SpacePicker, ColorScale, ColorChart } from "color-elements";
+
 let params = new URL(location.href).searchParams;
 
 let chartsPicker = document.querySelector("h2#charts space-picker");
