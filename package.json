@@ -48,7 +48,7 @@
 		"release-it": "^20.0.1"
 	},
 	"dependencies": {
-		"color-elements": "^0.0.10",
+		"color-elements": "^0.0.11",
 		"colorjs.io": "latest"
 	}
 }
