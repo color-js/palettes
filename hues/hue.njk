@@ -39,7 +39,7 @@
 	Charts
 </h2>
 {% for id, coord in ColorSpaces.oklch.coords %}
-	<color-chart y="oklch.{{ id }}" {{ "x=oklch.l" if id != "l" else "" }} info="L: oklch.l, C: oklch.c, H: oklch.h">
+	<color-chart id="chart-{{ id }}" y="oklch.{{ id }}" {{ "x=oklch.l" if id != "l" else "" }} info="L: oklch.l, C: oklch.c, H: oklch.h">
 		{% for colors in hue.palettes | plotHue -%}
 			<color-scale colors="{{ colors | serializeObject }}" info="L: oklch.l, C: oklch.c, H: oklch.h"></color-scale>
 		{%- endfor %}
