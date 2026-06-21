@@ -91,22 +91,40 @@ function scaleInRegion (scale, region) {
 	return false;
 }
 
+function channelRange (axis) {
+	let resolved = axis === "x" ? chart.xResolved : chart.yResolved;
+	return resolved?.range ?? resolved?.refRange ?? null;
+}
+
+// Treat a bound that matches (or loosens) the channel's full range as "no
+// limit", so the pre-filled full-range values don't filter or pin the axes.
+function effectiveMin (input, rangeMin) {
+	let value = parseLimit(input, -Infinity);
+	return rangeMin != null && value <= rangeMin ? -Infinity : value;
+}
+
+function effectiveMax (input, rangeMax) {
+	let value = parseLimit(input, Infinity);
+	return rangeMax != null && value >= rangeMax ? Infinity : value;
+}
+
 function currentRegion () {
+	let xRange = channelRange("x");
+	let yRange = channelRange("y");
+	let xMin = effectiveMin(axisInputs.xMin, xRange?.[0]);
+	let xMax = effectiveMax(axisInputs.xMax, xRange?.[1]);
+	let yMin = effectiveMin(axisInputs.yMin, yRange?.[0]);
+	let yMax = effectiveMax(axisInputs.yMax, yRange?.[1]);
+
 	return {
 		space: pickers[0]?.value ?? "oklch",
 		xChannel: axisChannel(chart.x),
 		yChannel: axisChannel(chart.y),
-		xMin: parseLimit(axisInputs.xMin, -Infinity),
-		xMax: parseLimit(axisInputs.xMax, Infinity),
-		yMin: parseLimit(axisInputs.yMin, -Infinity),
-		yMax: parseLimit(axisInputs.yMax, Infinity),
+		xMin, xMax, yMin, yMax,
+		// Active only if the user narrowed at least one bound below its range
+		active: xMin > -Infinity || xMax < Infinity || yMin > -Infinity || yMax < Infinity,
 	};
 }
-
-let regionActive = () =>
-	[axisInputs.xMin, axisInputs.xMax, axisInputs.yMin, axisInputs.yMax].some(
-		i => i.value.trim() !== "",
-	);
 
 // --- Apply everything -----------------------------------------------------
 
@@ -121,7 +139,7 @@ function applyFilters () {
 	chart.yMinAsNumber = region.yMin === -Infinity ? NaN : region.yMin;
 	chart.yMaxAsNumber = region.yMax === Infinity ? NaN : region.yMax;
 
-	let testRegion = regionActive();
+	let testRegion = region.active;
 
 	// Chart scales: hidden only by the hue filter (axis clipping is automatic).
 	for (let scale of chartScales) {
@@ -218,16 +236,19 @@ function updateAxisControls () {
 		let minInput = axisInputs[axis === "x" ? "xMin" : "yMin"];
 		let maxInput = axisInputs[axis === "x" ? "xMax" : "yMax"];
 
-		for (let input of [minInput, maxInput]) {
+		for (let [input, bound] of [[minInput, range?.[0]], [maxInput, range?.[1]]]) {
 			if (range) {
 				input.min = range[0];
 				input.max = range[1];
 				input.step = niceStep(range[0], range[1]);
+				// Pre-fill with the range bound so it's visible and tweakable
+				input.value = bound;
 			}
 			else {
 				input.removeAttribute("min");
 				input.removeAttribute("max");
 				input.step = "any";
+				input.value = "";
 			}
 		}
 
@@ -259,7 +280,12 @@ for (let picker of pickers) {
 hCenter.addEventListener("input", applyFiltersDebounced);
 hExtent.addEventListener("input", applyFiltersDebounced);
 axisForm.addEventListener("input", applyFiltersDebounced);
-axisForm.addEventListener("reset", () => requestAnimationFrame(applyFilters));
+axisForm.addEventListener("reset", () =>
+	requestAnimationFrame(() => {
+		updateAxisControls();
+		applyFilters();
+	}),
+);
 
 await Promise.all(
 	["space-picker", "channel-slider", "color-chart", "color-scale"].map(tag =>
