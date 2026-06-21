@@ -8,12 +8,17 @@ includes: '<link rel="stylesheet" href="./style.css" /><script src="./hue-range.
 <p>
 	A single chart and the color scales of <strong>all palettes</strong>, filtered by hue.
 	A scale is included when the hue (H) of its <strong>key color</strong> — the color with the
-	maximum chroma — falls within <em>extent</em> degrees of the <em>center</em> hue. Since hue
-	is circular, the range wraps around 0° automatically; an extent of 180° includes everything.
+	maximum chroma — falls within <em>extent</em> degrees of the slider's <em>center</em> hue.
+	Since hue is circular, the range wraps around 0° automatically; an extent of 180° includes
+	everything. You can also limit the chart to a region of the visible axes — scales that fall
+	entirely outside that region are dropped from the list below.
 </p>
 
 <form id="hue-filter" aria-label="Filter by hue">
-	<label>Center <input type="number" id="h-center" min="0" max="360" step="1" value="0">°</label>
+	<label class="slider-label">
+		Center hue
+		<channel-slider id="h-center" space="oklch-p3" channel="h" color="color(oklch-p3 0.7 0.18 0)" value="0"></channel-slider>
+	</label>
 	<label>± <input type="number" id="h-extent" min="0" max="180" step="1" value="180">°</label>
 	<output id="match-count" for="h-center h-extent"></output>
 </form>
@@ -36,6 +41,23 @@ includes: '<link rel="stylesheet" href="./style.css" /><script src="./hue-range.
 		{% endfor %}
 	{% endfor %}
 </color-chart>
+
+<form id="axis-filter" aria-label="Limit to a region of the chart axes">
+	<fieldset>
+		<legend>Limit to region</legend>
+		<label><span class="axis-name" data-axis="x">X</span>
+			<input type="number" id="x-min" step="any" placeholder="min">
+			<span>–</span>
+			<input type="number" id="x-max" step="any" placeholder="max">
+		</label>
+		<label><span class="axis-name" data-axis="y">Y</span>
+			<input type="number" id="y-min" step="any" placeholder="min">
+			<span>–</span>
+			<input type="number" id="y-max" step="any" placeholder="max">
+		</label>
+		<button type="reset">Reset</button>
+	</fieldset>
+</form>
 
 <h2 id="scales-section">
 	<space-picker value="oklch"></space-picker>

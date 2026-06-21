@@ -1,10 +1,22 @@
 #hue-filter {
 	display: flex;
 	align-items: center;
-	gap: .5em;
+	gap: .5em 1em;
 	flex-wrap: wrap;
 	margin-block: 1em;
 	font-size: 110%;
+}
+
+#hue-filter .slider-label {
+	display: flex;
+	align-items: center;
+	gap: .5em;
+	flex: 1 1 20em;
+}
+
+#hue-filter channel-slider {
+	flex: 1;
+	min-width: 12em;
 }
 
 #hue-filter input[type="number"] {
@@ -14,9 +26,44 @@
 }
 
 #hue-filter #match-count {
-	margin-inline-start: 1em;
 	color: hsl(220 10% 48%);
 	font-style: italic;
+}
+
+#axis-filter {
+	margin-block: 1em;
+}
+
+#axis-filter fieldset {
+	display: flex;
+	align-items: center;
+	gap: .5em 1.5em;
+	flex-wrap: wrap;
+	border: 1px solid hsl(220 10% 50% / .4);
+	border-radius: .3em;
+	padding: .5em 1em 1em;
+}
+
+#axis-filter legend {
+	padding-inline: .4em;
+	font-weight: bold;
+}
+
+#axis-filter label {
+	display: flex;
+	align-items: center;
+	gap: .4em;
+}
+
+#axis-filter .axis-name {
+	min-width: 5em;
+	font-weight: bold;
+}
+
+#axis-filter input[type="number"] {
+	width: 6em;
+	padding: .2em .4em;
+	font: inherit;
 }
 
 /* Hide filtered-out scales in the chart without affecting axis layout */

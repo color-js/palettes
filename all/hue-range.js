@@ -1,16 +1,40 @@
-// Filter all palette scales by the hue of their key color (max-chroma color).
+// Filter all palette scales by the hue of their key color (max-chroma color),
+// and optionally by a region of the chart's visible axes.
 // Key hues are precomputed at build time and stored in `data-key-hue` (degrees).
 
 let params = new URL(location.href).searchParams;
 
-let form = document.getElementById("hue-filter");
-let hCenterInput = document.getElementById("h-center");
-let hExtentInput = document.getElementById("h-extent");
+let hCenter = document.getElementById("h-center"); // <channel-slider>
+let hExtent = document.getElementById("h-extent");
 let matchCount = document.getElementById("match-count");
 
-// Every element that represents a scale (chart points + table rows)
-let scales = [...document.querySelectorAll("[data-key-hue]")];
-let rowCount = document.querySelectorAll(".key-scale-row").length;
+let axisForm = document.getElementById("axis-filter");
+let axisInputs = {
+	xMin: document.getElementById("x-min"),
+	xMax: document.getElementById("x-max"),
+	yMin: document.getElementById("y-min"),
+	yMax: document.getElementById("y-max"),
+};
+
+let chart = document.querySelector("color-chart");
+let pickers = [...document.querySelectorAll("space-picker")];
+let allScales = [...document.querySelectorAll("color-scale")];
+let chartScales = [...chart.querySelectorAll("color-scale")];
+let rows = [...document.querySelectorAll(".key-scale-row")];
+
+// Each table row paired with its (matching) chart scale, so we can reuse the
+// chart scale's parsed colors when testing the axis region.
+let rowScales = rows.map(row => ({ row, scale: row.querySelector("color-scale") }));
+
+function debounce (fn, ms = 120) {
+	let timer;
+	return (...args) => {
+		clearTimeout(timer);
+		timer = setTimeout(() => fn(...args), ms);
+	};
+}
+
+// --- Hue filter -----------------------------------------------------------
 
 // Shortest angular distance between two hues, in [0, 180]
 function hueDistance (a, b) {
@@ -18,59 +42,119 @@ function hueDistance (a, b) {
 	return d > 180 ? 360 - d : d;
 }
 
-function inRange (hue, center, extent) {
-	if (Number.isNaN(hue)) {
+function hueMatches (keyHue, center, extent) {
+	if (Number.isNaN(keyHue)) {
 		return false;
 	}
 
-	return hueDistance(hue, center) <= extent;
+	return hueDistance(keyHue, center) <= extent;
 }
 
-function filter () {
-	let center = Number(hCenterInput.value);
-	let extent = Number(hExtentInput.value);
+// --- Axis-region filter ---------------------------------------------------
 
-	if (Number.isNaN(center)) {
-		center = 0;
-	}
-	if (Number.isNaN(extent)) {
-		extent = 180;
+function parseLimit (input, fallback) {
+	let value = input.value.trim();
+	return value === "" ? fallback : Number(value);
+}
+
+// Channel id currently plotted on an axis, e.g. "oklch-p3.l" → "l" (or null)
+function axisChannel (coordRef) {
+	return coordRef ? String(coordRef).split(".").pop() : null;
+}
+
+// True if at least one color in the scale falls inside the [min, max] window
+// on both visible axes. Empty (NaN) coordinates count as out of range.
+function scaleInRegion (scale, region) {
+	let colors = scale.computedColors;
+	if (!colors) {
+		return true; // not parsed yet — don't hide
 	}
 
+	for (let { color } of colors) {
+		let c = color.to(region.space);
+
+		let yValue = c.get(region.yChannel);
+		if (!(yValue >= region.yMin && yValue <= region.yMax)) {
+			continue;
+		}
+
+		if (region.xChannel) {
+			let xValue = c.get(region.xChannel);
+			if (!(xValue >= region.xMin && xValue <= region.xMax)) {
+				continue;
+			}
+		}
+
+		return true;
+	}
+
+	return false;
+}
+
+function currentRegion () {
+	return {
+		space: pickers[0]?.value ?? "oklch",
+		xChannel: axisChannel(chart.x),
+		yChannel: axisChannel(chart.y),
+		xMin: parseLimit(axisInputs.xMin, -Infinity),
+		xMax: parseLimit(axisInputs.xMax, Infinity),
+		yMin: parseLimit(axisInputs.yMin, -Infinity),
+		yMax: parseLimit(axisInputs.yMax, Infinity),
+	};
+}
+
+let regionActive = () =>
+	[axisInputs.xMin, axisInputs.xMax, axisInputs.yMin, axisInputs.yMax].some(
+		i => i.value.trim() !== "",
+	);
+
+// --- Apply everything -----------------------------------------------------
+
+function applyFilters () {
+	let center = Number(hCenter.value) || 0;
+	let extent = hExtent.value.trim() === "" ? 180 : Number(hExtent.value);
+
+	// Constrain the chart's visible axes (the chart clips out-of-range points).
+	let region = currentRegion();
+	chart.xMinAsNumber = region.xMin === -Infinity ? NaN : region.xMin;
+	chart.xMaxAsNumber = region.xMax === Infinity ? NaN : region.xMax;
+	chart.yMinAsNumber = region.yMin === -Infinity ? NaN : region.yMin;
+	chart.yMaxAsNumber = region.yMax === Infinity ? NaN : region.yMax;
+
+	let testRegion = regionActive();
+
+	// Chart scales: hidden only by the hue filter (axis clipping is automatic).
+	for (let scale of chartScales) {
+		let hidden = !hueMatches(Number(scale.dataset.keyHue), center, extent);
+		scale.classList.toggle("filtered-out", hidden);
+	}
+
+	// Table rows: hidden by the hue filter or when entirely outside the region.
 	let matches = 0;
+	for (let { row, scale } of rowScales) {
+		let hidden = !hueMatches(Number(row.dataset.keyHue), center, extent);
 
-	for (let scale of scales) {
-		let hue = Number(scale.dataset.keyHue);
-		let visible = inRange(hue, center, extent);
-		scale.classList.toggle("filtered-out", !visible);
+		if (!hidden && testRegion) {
+			hidden = !scaleInRegion(scale, region);
+		}
 
-		if (visible && scale.classList.contains("key-scale-row")) {
+		row.classList.toggle("filtered-out", hidden);
+		if (!hidden) {
 			matches++;
 		}
 	}
 
-	matchCount.textContent = `${matches} of ${rowCount} scales`;
+	matchCount.textContent = `${matches} of ${rows.length} scales`;
 
-	params.set("hcenter", center);
+	params.set("hcenter", Math.round(center));
 	params.set("hextent", extent);
 	history.replaceState(null, "", `?${params}${location.hash}`);
 }
 
-// Restore values from URL, if present
-for (let [param, input] of [["hcenter", hCenterInput], ["hextent", hExtentInput]]) {
-	let value = params.get(param);
-	if (value !== null && value !== "") {
-		input.value = value;
-	}
-}
+let applyFiltersDebounced = debounce(applyFilters);
 
-form.addEventListener("input", filter);
-
-// Color space: drives the chart axes and the labels on every scale (chart + table).
-// Both section pickers (chart and scales) stay in sync, like the regular pages.
-let pickers = [...document.querySelectorAll("space-picker")];
-let chart = document.querySelector("color-chart");
-let allScales = [...document.querySelectorAll("color-scale")];
+// --- Color space ----------------------------------------------------------
+// Drives the chart axes and the labels on every scale; both pickers stay in sync.
 
 function updateSpace (source) {
 	let spaceId = source.value;
@@ -97,22 +181,50 @@ function updateSpace (source) {
 		}
 	}
 
+	// Axis-region limits are space/channel specific; clear them on space change.
+	axisForm.reset();
+	updateAxisLabels();
+
 	params.set("space", spaceId);
 	history.replaceState(null, "", `?${params}${location.hash}`);
+
+	applyFilters();
+}
+
+function updateAxisLabels () {
+	for (let el of axisForm.querySelectorAll(".axis-name")) {
+		let resolved = el.dataset.axis === "x" ? chart.xResolved : chart.yResolved;
+		el.textContent = resolved?.name ?? el.dataset.axis.toUpperCase();
+	}
+}
+
+// --- Init -----------------------------------------------------------------
+
+// Restore hue values from URL
+let centerParam = params.get("hcenter");
+if (centerParam !== null && centerParam !== "") {
+	hCenter.setAttribute("value", centerParam);
+}
+let extentParam = params.get("hextent");
+if (extentParam !== null && extentParam !== "") {
+	hExtent.value = extentParam;
 }
 
 let spaceId = params.get("space");
-
 for (let picker of pickers) {
 	if (spaceId) {
 		picker.value = spaceId;
 	}
-
 	picker.addEventListener("spacechange", () => updateSpace(picker));
 }
 
+hCenter.addEventListener("input", applyFiltersDebounced);
+hExtent.addEventListener("input", applyFiltersDebounced);
+axisForm.addEventListener("input", applyFiltersDebounced);
+axisForm.addEventListener("reset", () => requestAnimationFrame(applyFilters));
+
 await Promise.all(
-	["space-picker", "color-chart", "color-scale"].map(tag =>
+	["space-picker", "channel-slider", "color-chart", "color-scale"].map(tag =>
 		customElements.whenDefined(tag),
 	),
 );
@@ -121,4 +233,5 @@ if (pickers[0]) {
 	updateSpace(pickers[0]);
 }
 
-filter();
+updateAxisLabels();
+applyFilters();
