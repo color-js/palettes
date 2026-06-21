@@ -36,8 +36,7 @@ color-chart color-scale.filtered-out {
 	font-style: italic;
 }
 
-#scales .color-scale > div,
-color-chart + h2 + table .color-scale > div {
-	display: flex;
-	gap: .1em;
+/* Keep the scale strips compact so the full table stays manageable */
+#scales color-scale::part(color-swatch) {
+	font-size: 70%;
 }

@@ -65,13 +65,15 @@ for (let [param, input] of [["hmin", hMinInput], ["hmax", hMaxInput]]) {
 
 form.addEventListener("input", filter);
 
-// Single chart: keep it in sync with the space picker
-let picker = document.querySelector("#chart-section space-picker");
+// Color space: drives the chart axes and the labels on every scale (chart + table).
+// Both section pickers (chart and scales) stay in sync, like the regular pages.
+let pickers = [...document.querySelectorAll("space-picker")];
 let chart = document.querySelector("color-chart");
+let allScales = [...document.querySelectorAll("color-scale")];
 
-function updateSpace () {
-	let spaceId = picker.value;
-	let coords = Object.entries(picker.selectedSpace.coords);
+function updateSpace (source) {
+	let spaceId = source.value;
+	let coords = Object.entries(source.selectedSpace.coords);
 	let hasL = coords.some(([id]) => id === "l");
 	let info = coords
 		.map(([id, meta]) => `${(meta.name ?? id)[0]}: ${spaceId}.${id}`)
@@ -84,21 +86,28 @@ function updateSpace () {
 	chart.x = hasL && second[0] !== "l" ? `${spaceId}.l` : `${spaceId}.${first[0]}`;
 	chart.info = info;
 
-	for (let colorScale of chart.querySelectorAll("color-scale")) {
+	for (let colorScale of allScales) {
 		colorScale.info = info;
+	}
+
+	for (let picker of pickers) {
+		if (picker !== source && picker.value !== spaceId) {
+			picker.value = spaceId;
+		}
 	}
 
 	params.set("space", spaceId);
 	history.replaceState(null, "", `?${params}${location.hash}`);
 }
 
-if (picker) {
-	let spaceId = params.get("space");
+let spaceId = params.get("space");
+
+for (let picker of pickers) {
 	if (spaceId) {
 		picker.value = spaceId;
 	}
 
-	picker.addEventListener("spacechange", updateSpace);
+	picker.addEventListener("spacechange", () => updateSpace(picker));
 }
 
 await Promise.all(
@@ -107,8 +116,8 @@ await Promise.all(
 	),
 );
 
-if (picker) {
-	updateSpace();
+if (pickers[0]) {
+	updateSpace(pickers[0]);
 }
 
 filter();
