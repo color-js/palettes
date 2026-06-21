@@ -146,8 +146,8 @@ function applyFilters () {
 
 	matchCount.textContent = `${matches} of ${rows.length} scales`;
 
-	params.set("hcenter", Math.round(center));
-	params.set("hextent", extent);
+	params.set("hc", Math.round(center));
+	params.set("he", extent);
 	history.replaceState(null, "", `?${params}${location.hash}`);
 }
 
@@ -239,11 +239,11 @@ function updateAxisControls () {
 // --- Init -----------------------------------------------------------------
 
 // Restore hue values from URL
-let centerParam = params.get("hcenter");
+let centerParam = params.get("hc");
 if (centerParam !== null && centerParam !== "") {
 	hCenter.setAttribute("value", centerParam);
 }
-let extentParam = params.get("hextent");
+let extentParam = params.get("he");
 if (extentParam !== null && extentParam !== "") {
 	hExtent.value = extentParam;
 }
