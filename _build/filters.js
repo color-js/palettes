@@ -84,6 +84,28 @@ export function prependKeys (obj, prefix) {
 	return ret;
 }
 
+/**
+ * Given an OKLCH scale (level → [L, C, H]), return the hue of its key color,
+ * i.e. the color with the maximum chroma. Returned in the range [0, 360).
+ * @param {Object<string, number[]>} oklchColors
+ * @returns {number} Hue of the key color, or NaN if none
+ */
+export function keyHue (oklchColors) {
+	let maxChroma = -Infinity;
+	let hue = NaN;
+
+	for (let level in oklchColors) {
+		let [, c, h] = oklchColors[level];
+
+		if (c > maxChroma) {
+			maxChroma = c;
+			hue = h;
+		}
+	}
+
+	return normalizeAngle(hue);
+}
+
 export function plotHue (huePalettes) {
 	let ret = [];
 

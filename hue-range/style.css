@@ -1,0 +1,43 @@
+#hue-filter {
+	display: flex;
+	align-items: center;
+	gap: .5em;
+	flex-wrap: wrap;
+	margin-block: 1em;
+	font-size: 110%;
+}
+
+#hue-filter input[type="number"] {
+	width: 5em;
+	padding: .2em .4em;
+	font: inherit;
+}
+
+#hue-filter #match-count {
+	margin-inline-start: 1em;
+	color: hsl(220 10% 48%);
+	font-style: italic;
+}
+
+/* Hide filtered-out scales in the chart without affecting axis layout */
+color-chart color-scale.filtered-out {
+	visibility: hidden;
+}
+
+/* Hide filtered-out rows in the scales table entirely */
+#scales tr.filtered-out {
+	display: none;
+}
+
+#scales th small {
+	display: block;
+	color: hsl(220 10% 48%);
+	font-weight: normal;
+	font-style: italic;
+}
+
+#scales .color-scale > div,
+color-chart + h2 + table .color-scale > div {
+	display: flex;
+	gap: .1em;
+}
