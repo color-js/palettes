@@ -1,0 +1,14 @@
+---js
+{
+	layout: false,
+	pagination: {
+		data: "palettes",
+		resolve: "values",
+		size: 1,
+		alias: "palette",
+	},
+	permalink: "palettes/{{ palette.id }}/index.json",
+	eleventyExcludeFromCollections: true,
+}
+---
+{{ palette | dump(2) | safe }}

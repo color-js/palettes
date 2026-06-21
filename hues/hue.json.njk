@@ -1,0 +1,15 @@
+---js
+{
+	layout: false,
+	pagination: {
+		data: "hues",
+		resolve: "values",
+		size: 1,
+		alias: "hue",
+		before: paginationData => paginationData.filter(hue => hue.palette_count > 1)
+	},
+	permalink: "hues/{{ hue.name }}/index.json",
+	eleventyExcludeFromCollections: true,
+}
+---
+{{ hue | dump(2) | safe }}
