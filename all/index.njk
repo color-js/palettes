@@ -6,17 +6,16 @@ includes: '<link rel="stylesheet" href="./style.css" /><script src="./hue-range.
 <h1>Filter Palettes by Hue</h1>
 
 <p>
-	A single chart and the color scales of <strong>all palettes</strong>, filtered by hue range.
+	A single chart and the color scales of <strong>all palettes</strong>, filtered by hue.
 	A scale is included when the hue (H) of its <strong>key color</strong> — the color with the
-	maximum chroma — falls within the range below. If the start is larger than the end, the
-	range wraps around 0° (useful for reds).
+	maximum chroma — falls within <em>extent</em> degrees of the <em>center</em> hue. Since hue
+	is circular, the range wraps around 0° automatically; an extent of 180° includes everything.
 </p>
 
-<form id="hue-filter" aria-label="Filter by hue range">
-	<label>H from <input type="number" id="h-min" min="0" max="360" step="1" value="0"></label>
-	<label>to <input type="number" id="h-max" min="0" max="360" step="1" value="360"></label>
-	<span>°</span>
-	<output id="match-count" for="h-min h-max"></output>
+<form id="hue-filter" aria-label="Filter by hue">
+	<label>Center <input type="number" id="h-center" min="0" max="360" step="1" value="0">°</label>
+	<label>± <input type="number" id="h-extent" min="0" max="180" step="1" value="180">°</label>
+	<output id="match-count" for="h-center h-extent"></output>
 </form>
 
 <h2 id="chart-section">

@@ -4,43 +4,44 @@
 let params = new URL(location.href).searchParams;
 
 let form = document.getElementById("hue-filter");
-let hMinInput = document.getElementById("h-min");
-let hMaxInput = document.getElementById("h-max");
+let hCenterInput = document.getElementById("h-center");
+let hExtentInput = document.getElementById("h-extent");
 let matchCount = document.getElementById("match-count");
 
 // Every element that represents a scale (chart points + table rows)
 let scales = [...document.querySelectorAll("[data-key-hue]")];
 let rowCount = document.querySelectorAll(".key-scale-row").length;
 
-function inRange (hue, min, max) {
+// Shortest angular distance between two hues, in [0, 180]
+function hueDistance (a, b) {
+	let d = Math.abs(a - b) % 360;
+	return d > 180 ? 360 - d : d;
+}
+
+function inRange (hue, center, extent) {
 	if (Number.isNaN(hue)) {
 		return false;
 	}
 
-	if (min <= max) {
-		return hue >= min && hue <= max;
-	}
-
-	// Range wraps around 0° (e.g. 350 → 20)
-	return hue >= min || hue <= max;
+	return hueDistance(hue, center) <= extent;
 }
 
 function filter () {
-	let min = Number(hMinInput.value);
-	let max = Number(hMaxInput.value);
+	let center = Number(hCenterInput.value);
+	let extent = Number(hExtentInput.value);
 
-	if (Number.isNaN(min)) {
-		min = 0;
+	if (Number.isNaN(center)) {
+		center = 0;
 	}
-	if (Number.isNaN(max)) {
-		max = 360;
+	if (Number.isNaN(extent)) {
+		extent = 180;
 	}
 
 	let matches = 0;
 
 	for (let scale of scales) {
 		let hue = Number(scale.dataset.keyHue);
-		let visible = inRange(hue, min, max);
+		let visible = inRange(hue, center, extent);
 		scale.classList.toggle("filtered-out", !visible);
 
 		if (visible && scale.classList.contains("key-scale-row")) {
@@ -50,13 +51,13 @@ function filter () {
 
 	matchCount.textContent = `${matches} of ${rowCount} scales`;
 
-	params.set("hmin", min);
-	params.set("hmax", max);
+	params.set("hcenter", center);
+	params.set("hextent", extent);
 	history.replaceState(null, "", `?${params}${location.hash}`);
 }
 
-// Restore range from URL, if present
-for (let [param, input] of [["hmin", hMinInput], ["hmax", hMaxInput]]) {
+// Restore values from URL, if present
+for (let [param, input] of [["hcenter", hCenterInput], ["hextent", hExtentInput]]) {
 	let value = params.get(param);
 	if (value !== null && value !== "") {
 		input.value = value;
