@@ -27,6 +27,22 @@ includes: '<link rel="stylesheet" href="./style.css" /><script src="./hue-range.
 	<space-picker value="oklch"></space-picker>
 	Chart
 </h2>
+<details id="axis-region">
+	<summary>Limit to region</summary>
+	<form id="axis-filter" aria-label="Limit to a region of the chart axes">
+		<label><span class="axis-name" data-axis="x">X</span>
+			<input type="number" id="x-min" step="any" placeholder="min">
+			<span>–</span>
+			<input type="number" id="x-max" step="any" placeholder="max">
+		</label>
+		<label><span class="axis-name" data-axis="y">Y</span>
+			<input type="number" id="y-min" step="any" placeholder="min">
+			<span>–</span>
+			<input type="number" id="y-max" step="any" placeholder="max">
+		</label>
+		<button type="reset">Reset</button>
+	</form>
+</details>
 <color-chart y="oklch.c" x="oklch.l" info="L: oklch.l, C: oklch.c, H: oklch.h">
 	{% for id, palette in palettes %}
 		{% for hue, scale in palette.colors %}
@@ -41,23 +57,6 @@ includes: '<link rel="stylesheet" href="./style.css" /><script src="./hue-range.
 		{% endfor %}
 	{% endfor %}
 </color-chart>
-
-<form id="axis-filter" aria-label="Limit to a region of the chart axes">
-	<fieldset>
-		<legend>Limit to region</legend>
-		<label><span class="axis-name" data-axis="x">X</span>
-			<input type="number" id="x-min" step="any" placeholder="min">
-			<span>–</span>
-			<input type="number" id="x-max" step="any" placeholder="max">
-		</label>
-		<label><span class="axis-name" data-axis="y">Y</span>
-			<input type="number" id="y-min" step="any" placeholder="min">
-			<span>–</span>
-			<input type="number" id="y-max" step="any" placeholder="max">
-		</label>
-		<button type="reset">Reset</button>
-	</fieldset>
-</form>
 
 <h2 id="scales-section">
 	<space-picker value="oklch"></space-picker>
