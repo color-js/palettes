@@ -183,7 +183,7 @@ function updateSpace (source) {
 
 	// Axis-region limits are space/channel specific; clear them on space change.
 	axisForm.reset();
-	updateAxisLabels();
+	updateAxisControls();
 
 	params.set("space", spaceId);
 	history.replaceState(null, "", `?${params}${location.hash}`);
@@ -191,10 +191,48 @@ function updateSpace (source) {
 	applyFilters();
 }
 
-function updateAxisLabels () {
-	for (let el of axisForm.querySelectorAll(".axis-name")) {
-		let resolved = el.dataset.axis === "x" ? chart.xResolved : chart.yResolved;
-		el.textContent = resolved?.name ?? el.dataset.axis.toUpperCase();
+// A "nice" step (1/2/5 × 10ⁿ) giving roughly 100 increments across the range
+function niceStep (min, max) {
+	let raw = (max - min) / 100;
+	if (!(raw > 0)) {
+		return "any";
+	}
+
+	let mag = 10 ** Math.floor(Math.log10(raw));
+	let norm = raw / mag;
+	let nice = norm < 1.5 ? 1 : norm < 3 ? 2 : norm < 7 ? 5 : 10;
+	return +(nice * mag).toPrecision(4);
+}
+
+// Label each axis-region control and give its inputs the real channel range
+function updateAxisControls () {
+	for (let axis of ["x", "y"]) {
+		let resolved = axis === "x" ? chart.xResolved : chart.yResolved;
+		let range = resolved?.range ?? resolved?.refRange;
+
+		let nameEl = axisForm.querySelector(`.axis-name[data-axis="${axis}"]`);
+		if (nameEl) {
+			nameEl.textContent = resolved?.name ?? axis.toUpperCase();
+		}
+
+		let minInput = axisInputs[axis === "x" ? "xMin" : "yMin"];
+		let maxInput = axisInputs[axis === "x" ? "xMax" : "yMax"];
+
+		for (let input of [minInput, maxInput]) {
+			if (range) {
+				input.min = range[0];
+				input.max = range[1];
+				input.step = niceStep(range[0], range[1]);
+			}
+			else {
+				input.removeAttribute("min");
+				input.removeAttribute("max");
+				input.step = "any";
+			}
+		}
+
+		minInput.placeholder = range ? `${range[0]}` : "min";
+		maxInput.placeholder = range ? `${range[1]}` : "max";
 	}
 }
 

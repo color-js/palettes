@@ -30,23 +30,29 @@
 	font-style: italic;
 }
 
-#axis-filter {
+#axis-region {
 	margin-block: 1em;
+	border: 1px solid hsl(220 10% 50% / .4);
+	border-radius: .3em;
+	padding: 0 1em;
 }
 
-#axis-filter fieldset {
+#axis-region[open] {
+	padding-block: .5em 1em;
+}
+
+#axis-region summary {
+	margin-inline: -1em;
+	padding: .5em 1em;
+	font-weight: bold;
+	cursor: pointer;
+}
+
+#axis-filter {
 	display: flex;
 	align-items: center;
 	gap: .5em 1.5em;
 	flex-wrap: wrap;
-	border: 1px solid hsl(220 10% 50% / .4);
-	border-radius: .3em;
-	padding: .5em 1em 1em;
-}
-
-#axis-filter legend {
-	padding-inline: .4em;
-	font-weight: bold;
 }
 
 #axis-filter label {
