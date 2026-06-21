@@ -6,6 +6,12 @@
 		"data": "https://github.com/yeun/open-color/blob/master/open-color.json"
 	},
 	{
+		"id": "radix",
+		"name": "Radix Colors",
+		"url": "https://www.radix-ui.com/colors",
+		"data": "https://github.com/radix-ui/colors/blob/main/src/light.ts"
+	},
+	{
 		"id": "openprops",
 		"name": "Open Props",
 		"data": "https://github.com/argyleink/open-props/blob/main/src/props.colors.js"
