@@ -1,0 +1,71 @@
+---
+title: "Filter Palettes by Hue"
+includes: '<link rel="stylesheet" href="./style.css" /><script src="./hue-range.js" type="module"></script>'
+---
+
+<h1>Filter Palettes by Hue</h1>
+
+<p>
+	A single chart and the color scales of <strong>all palettes</strong>, filtered by hue range.
+	A scale is included when the hue (H) of its <strong>key color</strong> — the color with the
+	maximum chroma — falls within the range below. If the start is larger than the end, the
+	range wraps around 0° (useful for reds).
+</p>
+
+<form id="hue-filter" aria-label="Filter by hue range">
+	<label>H from <input type="number" id="h-min" min="0" max="360" step="1" value="0"></label>
+	<label>to <input type="number" id="h-max" min="0" max="360" step="1" value="360"></label>
+	<span>°</span>
+	<output id="match-count" for="h-min h-max"></output>
+</form>
+
+<h2 id="chart-section">
+	<space-picker value="oklch"></space-picker>
+	Chart
+</h2>
+<color-chart y="oklch.c" x="oklch.l" info="L: oklch.l, C: oklch.c, H: oklch.h">
+	{% for id, palette in palettes %}
+		{% for hue, scale in palette.colors %}
+			{%- if hue != "other" -%}
+			<color-scale
+				class="key-scale"
+				data-palette="{{ id }}"
+				data-hue="{{ hue }}"
+				data-key-hue="{{ palette.colors_oklch[hue] | keyHue }}"
+				colors="{{ scale | serializeObject }}"></color-scale>
+			{%- endif -%}
+		{% endfor %}
+	{% endfor %}
+</color-chart>
+
+<h2 id="scales-section">Color Scales</h2>
+<table id="scales">
+<thead>
+	<tr>
+		<th>Palette</th>
+		<th>Hue</th>
+		<th style="width: 100%">Scale</th>
+	</tr>
+</thead>
+<tbody>
+	{% for id, palette in palettes %}
+		{% for hue, scale in palette.colors %}
+			{%- if hue != "other" -%}
+			{%- set keyHueValue = palette.colors_oklch[hue] | keyHue -%}
+			<tr class="key-scale-row" data-palette="{{ id }}" data-hue="{{ hue }}" data-key-hue="{{ keyHueValue }}">
+				<th><a href="../palettes/{{ id }}/#{{ hue }}">{{ palette.name }}</a></th>
+				<th>
+					{%- if hues[hue].palette_count > 1 -%}
+					<a href="../hues/{{ hue }}/">{{ hues[hue].name }}</a>
+					{%- else -%}
+					{{ hue }}
+					{%- endif -%}
+					<small>{{ keyHueValue | number({ maximumFractionDigits: 0 }) }}°</small>
+				</th>
+				<td><color-scale colors="{{ scale | serializeObject }}" info="L: oklch.l, C: oklch.c, H: oklch.h"></color-scale></td>
+			</tr>
+			{%- endif -%}
+		{% endfor %}
+	{% endfor %}
+</tbody>
+</table>
