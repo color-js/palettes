@@ -62,6 +62,11 @@ function axisChannel (coordRef) {
 	return coordRef ? String(coordRef).split(".").pop() : null;
 }
 
+// Color space the chart's axes are currently expressed in, e.g. "oklch-p3"
+function axisSpace () {
+	return String(chart.y).split(".").slice(0, -1).join(".") || "oklch";
+}
+
 // True if at least one color in the scale falls inside the [min, max] window
 // on both visible axes. Empty (NaN) coordinates count as out of range.
 function scaleInRegion (scale, region) {
@@ -117,7 +122,7 @@ function currentRegion () {
 	let yMax = effectiveMax(axisInputs.yMax, yRange?.[1]);
 
 	return {
-		space: pickers[0]?.value ?? "oklch",
+		space: axisSpace(),
 		xChannel: axisChannel(chart.x),
 		yChannel: axisChannel(chart.y),
 		xMin, xMax, yMin, yMax,
@@ -255,6 +260,21 @@ function updateAxisControls () {
 		minInput.placeholder = range ? `${range[0]}` : "min";
 		maxInput.placeholder = range ? `${range[1]}` : "max";
 	}
+
+	lastAxes = { x: chart.x, y: chart.y };
+}
+
+// Re-sync the region controls when the chart's own picker changes an axis.
+// (The chart's y/x props don't reflect to attributes or emit a dedicated
+// event, so we watch its bubbling input/spacechange and diff the axes.)
+let lastAxes = { x: null, y: null };
+function onChartAxisChange () {
+	if (chart.x === lastAxes.x && chart.y === lastAxes.y) {
+		return;
+	}
+
+	updateAxisControls();
+	applyFilters();
 }
 
 // --- Init -----------------------------------------------------------------
@@ -280,6 +300,8 @@ for (let picker of pickers) {
 hCenter.addEventListener("input", applyFiltersDebounced);
 hExtent.addEventListener("input", applyFiltersDebounced);
 axisForm.addEventListener("input", applyFiltersDebounced);
+chart.addEventListener("input", onChartAxisChange);
+chart.addEventListener("spacechange", onChartAxisChange);
 axisForm.addEventListener("reset", () =>
 	requestAnimationFrame(() => {
 		updateAxisControls();
